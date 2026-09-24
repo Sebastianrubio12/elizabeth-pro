@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Elizabeth 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffd1df 0%, #ffebf0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Corazones de fondo animados */
+        .hearts-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 182, 193, 0.6);
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* Tarjeta principal - Glassmorphism */
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(255, 182, 193, 0.3);
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            /* Gradiente Dorado para el título */
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .quote-container {
+            margin: 2rem 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #quote-text {
+            font-size: 1.25rem;
+            color: #5a4a4e;
+            line-height: 1.6;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: #b38728;
+            font-weight: 600;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            #quote-text { font-size: 1.1rem; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Corazones animados en el fondo -->
+    <div class="hearts-bg" id="hearts-container"></div>
+
+    <div class="card">
+        <h1>Para Elizabeth</h1>
+        <div class="quote-container">
+            <p id="quote-text">Buscando tu mensaje de hoy...</p>
+        </div>
+        <div class="date" id="current-date"></div>
+    </div>
+
+    <script>
+        // Lista ampliada de frases para Elizabeth
+        const frases = [
+            "Buenos días, mi amor. Hoy es un lienzo en blanco, llénalo de colores.",
+            "Eres mi inspiración diaria, Elizabeth. ¡Que tengas un día maravilloso!",
+            "Tu sonrisa tiene el poder de iluminar hasta el día más gris. Nunca dejes de sonreír.",
+            "Hoy eres más fuerte, más inteligente y más hermosa que ayer. ¡Creo en ti!",
+            "No importa los retos que traiga el día, recuerda que estoy a tu lado.",
+            "Que hoy te pasen cosas tan hermosas como los sentimientos que provocas en mí.",
+            "Eres magia pura, Elizabeth. Sal y cómete el mundo hoy.",
+            "Buenos días a la mujer que hace que mi realidad sea mejor que mis sueños.",
+            "Cada nuevo amanecer es una excusa más para recordarte lo mucho que te amo.",
+            "Tu luz ilumina mi vida entera. Que este día sea tan brillante como tú.",
+            "Respira profundo, confía en ti y da lo mejor. Eres capaz de lograr todo lo que te propongas.",
+            "Mi parte favorita del día es saber que formas parte de mi vida.",
+            "Detrás de ti hay un poder infinito, y a tu lado, alguien que siempre te apoyará.",
+            "Hoy es un día perfecto para ser feliz. ¡Disfrútalo al máximo, mi amor!",
+            "Admiro tu fuerza, tu inteligencia y tu corazón. ¡Que tengas un jueves (o el día que sea) increíble!",
+            "Nunca olvides lo especial que eres para mí y para el mundo.",
+            "Que la alegría te acompañe desde tu primer café hasta que vuelvas a casa.",
+            "Eres el 'buenos días' que siempre quiero leer y la sonrisa que siempre quiero ver.",
+            "No dejes que nada ni nadie apague ese brillo dorado que te caracteriza.",
+            "Si el día se pone difícil, recuerda cuánto te amo y todo lo que hemos superado.",
+            "Me haces querer ser una mejor persona cada día. Gracias por existir, Elizabeth.",
+            "Que la vida te sorprenda hoy con pequeños detalles que te hagan inmensamente feliz.",
+            "Eres mi pensamiento al despertar y mi paz al ir a dormir. ¡Feliz día!",
+            "Confío plenamente en tu talento. Ve por tus metas hoy, yo te aplaudo desde aquí.",
+            "Tu belleza exterior es increíble, pero tu belleza interior es lo que me vuelve loco.",
+            "Aprovecha este nuevo día para brillar con tu luz propia.",
+            "Siempre serás mi lugar favorito en el mundo. ¡Que te vaya excelente hoy!",
+            "Tómate un momento para ti hoy, respira y recuerda lo mucho que vales.",
+            "Eres mi persona favorita. Que tu día esté lleno de bendiciones y sonrisas.",
+            "Te envío un abrazo virtual enorme para que empieces el día con toda la energía.",
+            "Elizabeth, no hay límites para lo que puedes lograr. Eres increíble."
+        ];
+
+        // Función para obtener la frase del día
+        function mostrarFraseDelDia() {
+            const hoy = new Date();
+            
+            // Obtenemos año, mes y día para crear una semilla matemática única por día
+            const año = hoy.getFullYear();
+            const mes = hoy.getMonth(); // 0-11
+            const dia = hoy.getDate(); // 1-31
+
+            // Sumamos los valores para generar un número único para hoy
+            const semilla = año + mes + dia;
+
+            // Usamos el módulo (%) para seleccionar una frase de la lista basada en la semilla
+            // Esto garantiza que siempre será la misma frase durante las 24 horas del día
+            const indiceFrase = semilla % frases.length;
+
+            // Mostramos la frase
+            document.getElementById('quote-text').innerText = `"${frases[indiceFrase]}"`;
+
+            // Mostramos la fecha formateada en español
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').innerText = hoy.toLocaleDateString('es-ES', opcionesFecha);
+        }
+
+        // Función para crear corazones flotantes
+        function crearCorazones() {
+            const container = document.getElementById('hearts-container');
+            for(let i = 0; i < 15; i++) {
+                let heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.className = 'heart';
+                // Posición horizontal aleatoria
+                heart.style.left = Math.random() * 100 + 'vw';
+                // Retraso de animación aleatorio para que no suban todos juntos
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                // Duración aleatoria
+                heart.style.animationDuration = 3 + Math.random() * 4 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // Ejecutar al cargar la página
+        window.onload = () => {
+            mostrarFraseDelDia();
+            crearCorazones();
+        };
+    </script>
+</body>
+</html>
