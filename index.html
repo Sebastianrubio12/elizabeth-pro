@@ -16,7 +16,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(180deg, #ffd1df 0%, #b85c8e 50%, #2c1024 100%);
+            /* Cielo nocturno estrellado */
+            background: linear-gradient(to bottom, #0b0f19 0%, #1a1525 50%, #3a1c31 100%);
             height: 100vh;
             height: 100dvh;
             display: flex;
@@ -26,46 +27,182 @@
             position: relative;
         }
 
-        /* --- JARDÍN DE FLORES BRILLANTES --- */
-        #garden-container { position: fixed; bottom: 0; left: 0; width: 100%; height: 45vh; z-index: 2; pointer-events: none; }
-        .css-flower-wrapper { position: absolute; bottom: -20px; display: flex; flex-direction: column; align-items: center; transform-origin: bottom center; animation: bloom-flower 2s ease-out forwards, sway 5s ease-in-out infinite alternate 2s; opacity: 0; }
-        @keyframes bloom-flower { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(var(--scale)); opacity: 1; } }
-        @keyframes sway { 0% { transform: rotate(-6deg); } 100% { transform: rotate(6deg); } }
+        /* --- ESTRELLAS PARPADEANTES --- */
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #fff;
+            animation: twinkle infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px #fff, 0 0 20px #fff; }
+        }
 
-        .stem { width: 3px; height: 180px; background: #ff6b9e; box-shadow: 0 0 12px 2px #ff6b9e; border-radius: 4px; margin-top: -15px; }
-        .css-flower-head { position: relative; width: 50px; height: 50px; z-index: 2; }
-        .petal { position: absolute; top: 0; left: 21px; width: 8px; height: 35px; background: #fff; border-radius: 50% 50% 20% 20%; transform-origin: bottom center; box-shadow: 0 0 10px 2px #ff1493, 0 0 25px 5px #ff69b4; }
-        
+        /* --- LUNA INTERACTIVA --- */
+        #moon {
+            position: fixed;
+            top: 8%;
+            right: 15%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #fffbd3, #fdf5a9);
+            border-radius: 50%;
+            box-shadow: 0 0 40px 10px rgba(253, 245, 169, 0.4), inset -10px -10px 20px rgba(0,0,0,0.1);
+            z-index: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        /* Efecto al tocar la luna */
+        .moon-pulse {
+            animation: moonGlow 1s ease-out;
+        }
+        @keyframes moonGlow {
+            0% { transform: scale(1); box-shadow: 0 0 40px 10px rgba(253, 245, 169, 0.4); }
+            50% { transform: scale(1.15); box-shadow: 0 0 80px 30px rgba(255, 255, 255, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 40px 10px rgba(253, 245, 169, 0.4); }
+        }
+        /* Pequeños cráteres en la luna */
+        .crater { position: absolute; background: rgba(0,0,0,0.05); border-radius: 50%; }
+        .c1 { width: 20px; height: 20px; top: 20px; left: 20px; }
+        .c2 { width: 12px; height: 12px; top: 50px; left: 60px; }
+        .c3 { width: 25px; height: 15px; top: 70px; left: 30px; transform: rotate(-20deg); }
+
+        /* --- FLORES NEÓN CON PROFUNDIDAD --- */
+        #garden-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60vh;
+            pointer-events: none;
+        }
+
+        .flower-wrapper {
+            position: absolute;
+            bottom: -20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: bottom center;
+            opacity: 0;
+            animation: bloom 2s ease-out forwards, sway infinite alternate ease-in-out;
+        }
+
+        @keyframes bloom {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(var(--scale)); opacity: 1; }
+        }
+        @keyframes sway {
+            0% { transform: scale(var(--scale)) rotate(-4deg); }
+            100% { transform: scale(var(--scale)) rotate(4deg); }
+        }
+
+        /* Tallo y hojas */
+        .stem-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        .stem {
+            width: 4px;
+            height: var(--stem-h);
+            background: #ff5722;
+            box-shadow: 0 0 12px 2px #ff5722;
+            border-radius: 4px;
+            margin-top: -10px;
+        }
+        .leaf {
+            position: absolute;
+            width: 12px;
+            height: 25px;
+            background: #ff5722;
+            box-shadow: 0 0 10px 2px #ff5722;
+            border-radius: 50% 0 50% 0;
+        }
+        .leaf.left { left: -10px; top: 40%; transform: rotate(-45deg); }
+        .leaf.right { right: -10px; top: 60%; transform: rotate(45deg); }
+
+        /* Cabeza de la flor */
+        .flower-head {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            z-index: 2;
+        }
+        .petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 30px;
+            background: #ffc107;
+            border-radius: 50%;
+            transform-origin: 50% 100%;
+            margin-left: -5px;
+            margin-top: -30px;
+            box-shadow: 0 0 15px 3px #ff9800, 0 0 5px 1px #ffeb3b inset;
+        }
         .petal:nth-child(1) { transform: rotate(0deg); } .petal:nth-child(2) { transform: rotate(45deg); }
         .petal:nth-child(3) { transform: rotate(90deg); } .petal:nth-child(4) { transform: rotate(135deg); }
         .petal:nth-child(5) { transform: rotate(180deg); } .petal:nth-child(6) { transform: rotate(225deg); }
         .petal:nth-child(7) { transform: rotate(270deg); } .petal:nth-child(8) { transform: rotate(315deg); }
         
-        .center { position: absolute; top: 15px; left: 15px; width: 20px; height: 20px; background: #fff066; border-radius: 50%; box-shadow: 0 0 20px 8px #ffb700, inset 0 0 5px #d4af37; z-index: 3; }
-
-        /* --- PARTÍCULAS BRILLANTES --- */
-        #particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .particle { position: absolute; bottom: -10px; background: #fff; border-radius: 50%; box-shadow: 0 0 10px 3px #ffb700; animation: floatUp 8s linear infinite; }
-        @keyframes floatUp { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.8; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px 8px #ffeb3b;
+            z-index: 3;
+        }
 
         /* --- TARJETA PRINCIPAL --- */
-        .card { background: rgba(255, 255, 255, 0.65); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 24px; padding: 2.5rem 2rem; width: 90%; max-width: 460px; text-align: center; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); z-index: 5; animation: fadeInCard 1.5s ease-out; position: relative; }
+        .card { 
+            background: rgba(20, 15, 30, 0.6); 
+            -webkit-backdrop-filter: blur(12px); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            border-radius: 24px; 
+            padding: 2.5rem 2rem; 
+            width: 90%; 
+            max-width: 460px; 
+            text-align: center; 
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.1); 
+            z-index: 10; 
+            animation: fadeInCard 1.5s ease-out; 
+            position: relative; 
+        }
         @keyframes fadeInCard { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        h1 { font-family: 'Dancing Script', cursive; font-size: 3.2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #c49635, #f5d47a, #b3821a, #f7de94); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 1px 1px 3px rgba(179, 130, 26, 0.2); }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3.2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #f5d47a, #ffffff, #f7de94); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 15px rgba(245, 212, 122, 0.3); }
         .quote-container { margin: 1.8rem 0; min-height: 100px; display: flex; align-items: center; justify-content: center; }
-        #quote-text { font-size: 1.2rem; color: #3a2e32; line-height: 1.7; font-weight: 500; font-style: italic; text-shadow: 0px 0px 1px rgba(255,255,255,0.5); }
-        .date { font-size: 0.9rem; color: #a47614; font-weight: 600; margin-top: 1rem; text-transform: uppercase; letter-spacing: 1.5px; }
+        #quote-text { font-size: 1.2rem; color: #e6e0e9; line-height: 1.7; font-weight: 300; font-style: italic; letter-spacing: 0.5px; }
+        .date { font-size: 0.85rem; color: #f5d47a; font-weight: 600; margin-top: 1rem; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- BOTÓN DE MÚSICA FLOTANTE --- */
+        /* --- BOTÓN DE MÚSICA --- */
         .music-btn {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
             -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 10px 18px;
             border-radius: 30px;
             color: #fff;
@@ -73,32 +210,31 @@
             font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            z-index: 10;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
+            z-index: 20;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .music-btn:active { transform: scale(0.95); }
 
-        @media (max-width: 380px) { h1 { font-size: 2.6rem; } #quote-text { font-size: 1.1rem; } .card { padding: 1.8rem 1.5rem; } .music-btn { padding: 8px 14px; font-size: 0.8rem; } }
+        @media (max-width: 380px) { h1 { font-size: 2.6rem; } #quote-text { font-size: 1.1rem; } .card { padding: 1.8rem 1.5rem; } #moon { width: 70px; height: 70px; right: 10%; } }
     </style>
 </head>
 <body>
 
-    <!-- REPRODUCTOR DE AUDIO OCULTO -->
     <audio id="bg-music" loop>
-        <!-- Aquí conectamos el archivo que descargarás -->
         <source src="evangeline.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- BOTÓN PARA ACTIVAR LA MÚSICA -->
-    <div id="music-control" class="music-btn">
-        🎵 Activar música
+    <div id="music-control" class="music-btn">🎵 Activar música</div>
+
+    <div id="stars-container"></div>
+    
+    <div id="moon" onclick="pulseMoon()">
+        <div class="crater c1"></div>
+        <div class="crater c2"></div>
+        <div class="crater c3"></div>
     </div>
 
-    <div id="particles-container"></div>
     <div id="garden-container"></div>
 
     <div class="card">
@@ -144,57 +280,85 @@
             "Eres la Monica de mi Chandler, ¡el complemento perfecto! Mi ingeniera, mi amor, mi todo."
         ];
 
-        // Control de música
+        // Lógica de música
         const musicBtn = document.getElementById('music-control');
         const bgMusic = document.getElementById('bg-music');
         let isPlaying = false;
-
         musicBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                bgMusic.pause();
-                musicBtn.innerHTML = '🎵 Activar música';
-            } else {
-                bgMusic.play();
-                musicBtn.innerHTML = '🎶 Pausar música';
-            }
+            if (isPlaying) { bgMusic.pause(); musicBtn.innerHTML = '🎵 Activar música'; } 
+            else { bgMusic.play(); musicBtn.innerHTML = '🎶 Pausar música'; }
             isPlaying = !isPlaying;
         });
 
-        function crearJardinBrillante() {
-            const container = document.getElementById('garden-container');
-            const totalFlores = 14;
-            for (let i = 0; i < totalFlores; i++) {
-                const flower = document.createElement('div');
-                flower.className = 'css-flower-wrapper';
-                flower.style.left = (Math.random() * 94 + 2) + '%';
-                flower.style.setProperty('--scale', 0.4 + Math.random() * 0.7);
-                flower.style.animationDelay = (Math.random() * 3) + 's';
-                flower.innerHTML = `
-                    <div class="css-flower-head">
-                        <div class="petal"></div><div class="petal"></div>
-                        <div class="petal"></div><div class="petal"></div>
-                        <div class="petal"></div><div class="petal"></div>
-                        <div class="petal"></div><div class="petal"></div>
-                        <div class="center"></div>
-                    </div>
-                    <div class="stem"></div>
-                `;
-                container.appendChild(flower);
+        // Interacción de la luna
+        function pulseMoon() {
+            const moon = document.getElementById('moon');
+            moon.classList.remove('moon-pulse');
+            void moon.offsetWidth; // Reinicia la animación
+            moon.classList.add('moon-pulse');
+        }
+
+        // Generar Estrellas
+        function crearEstrellas() {
+            const container = document.getElementById('stars-container');
+            for (let i = 0; i < 70; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = (Math.random() * 3 + 1) + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                star.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(star);
             }
         }
 
-        function crearParticulas() {
-            const container = document.getElementById('particles-container');
-            for(let i = 0; i < 20; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.width = (Math.random() * 4 + 2) + 'px';
-                p.style.height = p.style.width;
-                p.style.animationDuration = (8 + Math.random() * 10) + 's';
-                p.style.animationDelay = (Math.random() * 5) + 's';
-                container.appendChild(p);
-            }
+        // Generar Flores en Capas para dar Profundidad 3D
+        function crearJardinConProfundidad() {
+            const container = document.getElementById('garden-container');
+            
+            // Capa 1: Fondo (Más pequeñas, borrosas, oscuras)
+            // Capa 2: Medio (Tamaño normal)
+            // Capa 3: Frente (Grandes y brillantes)
+            const capas = [
+                { cantidad: 15, escalaMin: 0.3, escalaMax: 0.5, blur: '3px', z: 2, talloMin: 100, talloMax: 150, delayMax: 5 },
+                { cantidad: 12, escalaMin: 0.6, escalaMax: 0.8, blur: '1px', z: 4, talloMin: 140, talloMax: 200, delayMax: 4 },
+                { cantidad: 8,  escalaMin: 0.9, escalaMax: 1.2, blur: '0px', z: 6, talloMin: 180, talloMax: 250, delayMax: 3 }
+            ];
+
+            capas.forEach(capa => {
+                for (let i = 0; i < capa.cantidad; i++) {
+                    const flower = document.createElement('div');
+                    flower.className = 'flower-wrapper';
+                    flower.style.left = (Math.random() * 96) + '%';
+                    flower.style.zIndex = capa.z;
+                    flower.style.filter = `blur(${capa.blur})`;
+                    
+                    const escala = capa.escalaMin + Math.random() * (capa.escalaMax - capa.escalaMin);
+                    flower.style.setProperty('--scale', escala);
+                    flower.style.animationDelay = (Math.random() * capa.delayMax) + 's';
+                    flower.style.animationDuration = (4 + Math.random() * 4) + 's';
+
+                    const altoTallo = capa.talloMin + Math.random() * (capa.talloMax - capa.talloMin);
+
+                    flower.innerHTML = `
+                        <div class="flower-head">
+                            <div class="petal"></div><div class="petal"></div>
+                            <div class="petal"></div><div class="petal"></div>
+                            <div class="petal"></div><div class="petal"></div>
+                            <div class="petal"></div><div class="petal"></div>
+                            <div class="center"></div>
+                        </div>
+                        <div class="stem-container">
+                            <div class="leaf left"></div>
+                            <div class="stem" style="--stem-h: ${altoTallo}px;"></div>
+                            <div class="leaf right"></div>
+                        </div>
+                    `;
+                    container.appendChild(flower);
+                }
+            });
         }
 
         function mostrarFraseDelDia() {
@@ -210,8 +374,8 @@
 
         window.onload = () => {
             mostrarFraseDelDia();
-            crearJardinBrillante();
-            crearParticulas();
+            crearEstrellas();
+            crearJardinConProfundidad();
         };
     </script>
 </body>
