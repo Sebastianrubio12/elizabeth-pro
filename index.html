@@ -16,7 +16,6 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            /* Cielo nocturno estrellado */
             background: linear-gradient(to bottom, #0b0f19 0%, #1a1525 50%, #3a1c31 100%);
             height: 100vh;
             height: 100dvh;
@@ -63,7 +62,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        /* Efecto al tocar la luna */
         .moon-pulse {
             animation: moonGlow 1s ease-out;
         }
@@ -72,7 +70,6 @@
             50% { transform: scale(1.15); box-shadow: 0 0 80px 30px rgba(255, 255, 255, 0.8); }
             100% { transform: scale(1); box-shadow: 0 0 40px 10px rgba(253, 245, 169, 0.4); }
         }
-        /* Pequeños cráteres en la luna */
         .crater { position: absolute; background: rgba(0,0,0,0.05); border-radius: 50%; }
         .c1 { width: 20px; height: 20px; top: 20px; left: 20px; }
         .c2 { width: 12px; height: 12px; top: 50px; left: 60px; }
@@ -108,7 +105,6 @@
             100% { transform: scale(var(--scale)) rotate(4deg); }
         }
 
-        /* Tallo y hojas */
         .stem-container {
             position: relative;
             display: flex;
@@ -133,7 +129,6 @@
         .leaf.left { left: -10px; top: 40%; transform: rotate(-45deg); }
         .leaf.right { right: -10px; top: 60%; transform: rotate(45deg); }
 
-        /* Cabeza de la flor */
         .flower-head {
             position: relative;
             width: 40px;
@@ -191,7 +186,7 @@
         
         h1 { font-family: 'Dancing Script', cursive; font-size: 3.2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #f5d47a, #ffffff, #f7de94); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 15px rgba(245, 212, 122, 0.3); }
         .quote-container { margin: 1.8rem 0; min-height: 100px; display: flex; align-items: center; justify-content: center; }
-        #quote-text { font-size: 1.2rem; color: #e6e0e9; line-height: 1.7; font-weight: 300; font-style: italic; letter-spacing: 0.5px; }
+        #quote-text { font-size: 1.15rem; color: #e6e0e9; line-height: 1.7; font-weight: 300; font-style: italic; letter-spacing: 0.5px; }
         .date { font-size: 0.85rem; color: #f5d47a; font-weight: 600; margin-top: 1rem; text-transform: uppercase; letter-spacing: 2px; }
 
         /* --- BOTÓN DE MÚSICA --- */
@@ -246,38 +241,48 @@
     </div>
 
     <script>
+        // 40 frases nuevas, sin repeticiones de estructura, fluidas y muy naturales.
         const frases = [
-            "Eres la leche de mi Milo, el complemento perfecto que le da sabor a todos mis días.",
-            "Si nuestra historia fuera un libro, ni la misma Virginia P. Leon podría escribir algo tan hermoso.",
-            "Sé que serás la ingeniera más brillante de todas. Estoy muy orgulloso de verte crecer cada día.",
-            "Eres mi 'lobster'. A mi vida le haces tanto bien como el café a Central Perk en Friends.",
-            "He visto 14 millones de futuros al estilo Doctor Strange, y en todos los que soy feliz estoy contigo.",
-            "Un día frío es la excusa perfecta del universo para llenarte de besos y darte mil abrazos más.",
-            "Mi mayor sueño es construir esa hermosa familia que tanto queremos y apoyarte en cada meta.",
-            "Ni todos los girasoles, rosas y tulipanes de un jardín igualan lo mucho que floreces cada día.",
-            "Me atrapaste desde el primer día. Ni Spiderman hace redes tan fuertes como las que nos unen.",
-            "Contigo aprendí lo que es la verdadera responsabilidad afectiva; eres mi lugar seguro.",
-            "No hay obra de arte en ningún museo del mundo que me guste mirar más que a ti.",
-            "Tú, yo, cobijitas, el clima frío y maratón de Big Bang Theory. Mi plan perfecto.",
-            "Me haces más feliz que un buen plato de frijoles con chicharrón de cerdo. ¡Eres mi sazón!",
-            "Admiro muchísimo tu hambre de superación personal. Vas a llegar más lejos de lo que imaginas.",
-            "Como dirían en My Little Pony: la magia de la amistad es linda, pero nuestro amor es invencible.",
-            "Tú eres el pollo de mi arroz y la leche de mi Milo. ¡El toque exacto que hace todo mejor!",
-            "Te prometo llenarte de cumplidos cada día, porque mereces que te recuerden lo espectacular que eres.",
-            "Cada vez que te veo sonreír, siento que estoy caminando por un campo de tulipanes y rosas.",
-            "Mi ingeniera favorita: me encanta ver cómo diseñas y construyes el camino hacia tus sueños.",
-            "Tener a alguien con tanta responsabilidad afectiva me hace el hombre más afortunado del mundo.",
-            "Eres mi Penny, pero con el cerebro de Sheldon y Leonard juntos. ¡Mi ingeniera perfecta!",
-            "Amo pasear contigo, ya sea descubriendo un museo nuevo o simplemente tomados de la mano.",
-            "Quiero ser ese abrazo que te quite el frío y ese beso que borre cualquier preocupación del día.",
-            "Mi meta de superación personal todos los días es ser un hombre digno de la mujer increíble que eres.",
-            "Si el amor fuera un libro de Virginia P. Leon, tú serías el capítulo que nunca quiero terminar.",
-            "Me emociona pensar en nuestra futura familia. Sé que serás una madre y una profesional extraordinaria.",
-            "Eres la Mary Jane de este Peter Parker, la razón por la que siempre quiero ser un héroe para ti.",
-            "Contigo cualquier tarde de frío viendo capítulos repetidos de Friends es el paraíso en la tierra.",
-            "Mis cumplidos se quedan cortos para describir tu magia. Eres mi universo entero.",
-            "Prometo cuidarte, abrazarte y amarte hasta que estemos viejitos comiendo frijoles juntos.",
-            "Eres la Monica de mi Chandler, ¡el complemento perfecto! Mi ingeniera, mi amor, mi todo."
+            "¿Quién diría que la mezcla de queso con helado y chocolate se parece tanto a nosotros? Una locura inesperada, pero absolutamente perfecta.",
+            "Espero que hoy tengas un día tan espectacular como un buen plato de frijoles con chicharrón. ¡A comerte el mundo, hermosa!",
+            "Eres mi momento de paz: tan dulce y reconfortante como un vaso de Milo con pura leche.",
+            "Ni siquiera Doctor Strange podría encontrar un universo alterno donde yo no esté locamente enamorado de ti.",
+            "Nuestro amor es el verdadero One Piece, y no hay mejor aventura que navegar la vida a tu lado.",
+            "¡Prodigiosa Ladybug! Siempre encuentras la manera de usar tu magia para salvar mis días y llenarlos de color.",
+            "Eres la Monica de mi Chandler: pones orden en mi caos, eres mi refugio y mi mejor amiga.",
+            "A veces me siento como Leonard viendo a Penny: completamente fascinado por la ingeniera tan increíble que tengo enfrente.",
+            "Como Peter Parker y Mary Jane, nosotros estamos destinados a cuidarnos y amarnos en cualquier multiverso.",
+            "No hay nada que disfrute más que acurrucarme contigo en un día frío a ver nuestras series animadas favoritas.",
+            "Me inspira muchísimo tu sed de superación. Sé que te convertirás en la ingeniera más brillante de todas.",
+            "Cierra los ojos e imagina: nosotros, caminando por las calles de Francia, tomados de la mano. Ese es el futuro que quiero contigo.",
+            "Admiro profundamente lo mucho que valoras el tiempo de películas con tus papás. Tienes el corazón más puro que conozco.",
+            "Gracias por enseñarme cada día lo que es la responsabilidad afectiva. A tu lado, el amor se siente seguro, libre y en paz.",
+            "Me hace mucha ilusión pensar en la familia que construiremos algún día. Contigo, cualquier sueño parece posible.",
+            "El clima frío solo tiene un propósito en este mundo: darnos la excusa perfecta para llenarnos de abrazos.",
+            "Si plantara un tulipán por cada vez que me haces sonreír, tendríamos un jardín inmenso solo para nosotros.",
+            "Que este día esté lleno de éxitos y pequeños momentos que te hagan tan feliz como tú me haces a mí.",
+            "Un jugo de mango en leche para refrescar la tarde, y tu mirada para alegrarme la vida entera.",
+            "Adoro cómo todo tiene que ser preparado en leche para ti, porque hasta en esos pequeños detalles encuentro razones para amarte más.",
+            "Eres la protagonista de mi historia favorita, mucho más emocionante que cualquier capítulo de Friends o The Big Bang Theory.",
+            "Cada esfuerzo que haces hoy en tu carrera, es un ladrillo más para ese futuro hermoso que nos espera. ¡Tú puedes con todo!",
+            "A tu lado descubrí que los fines de semana perfectos son aquellos donde simplemente somos felices viendo películas en familia.",
+            "Tienes una luz propia que opaca a cualquier estrella en el cielo. Sigue brillando así de fuerte, mi amor.",
+            "Haces que la realidad sea mil veces mejor que cualquier mundo de ficción, superhéroes o series animadas.",
+            "Hoy amanecí pensando en lo afortunado que soy por tener a una mujer tan inteligente, hermosa y determinada a mi lado.",
+            "Respira profundo, confía en tu talento y da lo mejor de ti hoy. Yo estaré aquí, apoyándote incondicionalmente.",
+            "Tu sonrisa tiene el superpoder de derretir cualquier tristeza y hacer que todo vuelva a iluminarse.",
+            "Serás una ingeniera espectacular, una madre maravillosa y siempre, siempre, el amor de mi vida.",
+            "Ojalá pudieras verte a través de mis ojos, para que entendieras por qué me tienes tan enamorado.",
+            "Que la alegría te acompañe desde tu primer cafecito (o tu vaso de Milo) hasta que vuelvas a casa a descansar.",
+            "Eres esa pieza del rompecabezas que no sabía que me faltaba, pero que ahora hace que todo tenga sentido.",
+            "Amo tu forma de ver el mundo, tu empatía y esa madurez con la que siempre cuidas nuestro vínculo.",
+            "Me encanta cuando te emocionas hablando de las cosas que te gustan. Podría escucharte horas sin cansarme.",
+            "En ti encontré no solo a mi novia, sino a mi confidente, mi cómplice de aventuras y mi mayor motivación.",
+            "No importa qué retos traiga este día, recuerda que somos un equipo y siempre estaré para sostener tu mano.",
+            "Ojalá el tiempo se detuviera cada vez que estamos bajo las cobijitas, muertos de risa por cualquier tontería.",
+            "Tienes el don de hacer que lo ordinario se vuelva extraordinario. Contigo, la vida es una celebración constante.",
+            "Eres mi refugio en los días de lluvia y mi sol en las mañanas frías. Eres todo lo que siempre soñé.",
+            "Te amo por lo que eres, por lo que me impulsas a ser y por todo lo hermoso que construiremos juntos. ¡Que tengas un día maravilloso!"
         ];
 
         // Lógica de música
@@ -294,7 +299,7 @@
         function pulseMoon() {
             const moon = document.getElementById('moon');
             moon.classList.remove('moon-pulse');
-            void moon.offsetWidth; // Reinicia la animación
+            void moon.offsetWidth; 
             moon.classList.add('moon-pulse');
         }
 
@@ -314,13 +319,10 @@
             }
         }
 
-        // Generar Flores en Capas para dar Profundidad 3D
+        // Generar Flores en Capas
         function crearJardinConProfundidad() {
             const container = document.getElementById('garden-container');
             
-            // Capa 1: Fondo (Más pequeñas, borrosas, oscuras)
-            // Capa 2: Medio (Tamaño normal)
-            // Capa 3: Frente (Grandes y brillantes)
             const capas = [
                 { cantidad: 15, escalaMin: 0.3, escalaMax: 0.5, blur: '3px', z: 2, talloMin: 100, talloMax: 150, delayMax: 5 },
                 { cantidad: 12, escalaMin: 0.6, escalaMax: 0.8, blur: '1px', z: 4, talloMin: 140, talloMax: 200, delayMax: 4 },
