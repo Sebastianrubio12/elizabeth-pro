@@ -31,6 +31,64 @@ body {
 }
 
 /* =========================================
+   PERSONAJES EN CRAYÓN
+   ========================================= */
+#character-decorations {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.character {
+    position: absolute;
+    width: 132px;
+    height: 182px;
+    overflow: visible;
+    filter: url(#crayon-texture) drop-shadow(2px 3px 0 rgba(48, 44, 53, 0.12));
+    animation: characterFloat 6s ease-in-out infinite;
+}
+
+.character-outline,
+.character-line {
+    stroke: #302c35;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.character-line {
+    stroke-width: 2.5;
+}
+
+.character-spiderman {
+    left: max(12px, calc(50% - 405px));
+    top: 24vh;
+    transform: rotate(-5deg);
+}
+
+.character-ladybug {
+    right: max(12px, calc(50% - 405px));
+    top: 43vh;
+    transform: rotate(5deg);
+    animation-delay: -2s;
+}
+
+.character-luffy {
+    right: max(12px, calc(50% - 430px));
+    top: 18vh;
+    width: 116px;
+    height: 142px;
+    transform: rotate(5deg);
+    animation-delay: -4s;
+}
+
+@keyframes characterFloat {
+    0%, 100% { margin-top: 0; }
+    50% { margin-top: -7px; }
+}
+
+/* =========================================
    BOTÓN DE MÚSICA
    ========================================= */
 .music-btn {
@@ -136,6 +194,7 @@ body {
     z-index: -1;
 }
 
+/* Sombrero de paja inspirado en One Piece, separado del texto */
 #main-title {
     color: var(--accent-color);
     font-size: 3rem;
@@ -270,5 +329,27 @@ body {
 
     .tulip-svg {
         width: 15%;
+    }
+
+    .character {
+        width: 78px;
+        height: 108px;
+    }
+
+    .character-spiderman {
+        left: 5px;
+        top: 24vh;
+    }
+
+    .character-ladybug {
+        right: 5px;
+        top: 43vh;
+    }
+
+    .character-luffy {
+        right: 8px;
+        top: 18vh;
+        width: 72px;
+        height: 88px;
     }
 }
