@@ -39,44 +39,84 @@
     </div>
 
     <div id="character-decorations" aria-hidden="true">
-        <svg class="character character-spiderman" viewBox="0 0 160 220">
+        <svg class="character character-kitty" viewBox="0 0 160 220">
             <defs><filter id="crayon-texture"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="8" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.3"/></filter></defs>
-            <path class="character-outline" d="M75 26c-18 7-25 23-22 39l7 16-12 28-8 40 14 2 10-28 5 35 14 0 4-37 8 37 14-1-2-36 11 28 13-5-13-38-11-25 9-16c4-17-2-31-20-39z" fill="#2879b9"/>
-            <path class="character-outline" d="M54 38c2-17 13-27 26-28 16 1 27 12 27 29l-10 34H64z" fill="#d93645"/>
-            <path class="character-line" d="M60 34c14 8 29 8 43-1M58 42c17 10 32 10 46 0M56 52c19 10 35 10 49-1M55 62c18 9 35 9 50 0M79 12v60M68 15l4 55M90 15l-4 55" fill="none"/>
-            <path class="character-outline" d="M68 39l13-8 13 8-7 12H74z" fill="#fffdf3"/>
-            <path class="character-outline" d="M60 81l20 12 20-12-5 35H65z" fill="#d93645"/>
-            <path class="character-line" d="M80 91v24M67 89l13 7 13-7M80 93c-7 9-13 15-19 18M80 93c7 9 13 15 19 18" fill="none"/>
-            <path class="character-line" d="M50 110l-12-10M47 125l-16-2M110 111l13-11M113 126l16-3" fill="none"/>
+            <!-- Orejas -->
+            <path class="character-outline" d="M40 70 L26 34 L62 52 Z" fill="#fffdf3"/>
+            <path class="character-outline" d="M120 70 L134 34 L98 52 Z" fill="#fffdf3"/>
+            <!-- Cabeza grande (ovalo/cuadrado redondeado) -->
+            <path class="character-outline" d="M30 86c0-26 22-42 50-42s50 16 50 42-22 46-50 46-50-20-50-46z" fill="#fffdf3"/>
+            <!-- Ojos -->
+            <ellipse cx="62" cy="88" rx="5.5" ry="8" fill="#302c35" stroke="none"/>
+            <ellipse cx="98" cy="88" rx="5.5" ry="8" fill="#302c35" stroke="none"/>
+            <!-- Nariz amarilla -->
+            <ellipse cx="80" cy="100" rx="7" ry="5" fill="#ffca28"/>
+            <!-- Bigotes -->
+            <path class="character-line" d="M44 90l-18-4M44 100l-19 2M44 110l-17 7M116 90l18-4M116 100l19 2M116 110l17 7" fill="none"/>
+            <!-- Lazo rojo en la oreja izquierda -->
+            <path class="character-outline" d="M34 60l-20-12 4 24z" fill="#e94255"/>
+            <path class="character-outline" d="M34 60l20-12-4 24z" fill="#e94255"/>
+            <circle class="character-outline" cx="34" cy="60" r="7" fill="#e94255"/>
+            <!-- Cuerpo trapezoidal -->
+            <path class="character-outline" d="M58 128h44l10 60H48z" fill="#e94255"/>
+            <path class="character-line" d="M80 132v54" fill="none"/>
+            <!-- Piernas -->
+            <path class="character-outline" d="M52 186h22v22H52zM86 186h22v22H86z" fill="#fffdf3"/>
         </svg>
 
         <svg class="character character-ladybug" viewBox="0 0 160 220">
-            <path class="character-outline" d="M66 55c-18 7-28 25-26 48l-8 58 22 2 8-34 4 41h22l4-41 9 34 22-4-10-57c0-23-10-40-27-47z" fill="#e94255"/>
-            <path class="character-outline" d="M58 42c1-21 11-32 23-32 14 0 24 11 24 32l-7 23H65z" fill="#e94255"/>
-            <path class="character-outline" d="M60 39c7-8 35-8 44 0l-5 14H65z" fill="#302c35"/>
-            <path d="M65 43c7-5 12-5 17 1-5 7-11 7-17 0zm27 0c-6-6-11-5-17 1 5 7 11 7 17 0z" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
-            <path class="character-line" d="M80 65v92M67 74l-10 11M93 74l10 11" fill="none"/>
+            <!-- Patas -->
+            <path class="character-line" d="M46 150l-18 10M44 168l-16 16M114 150l18 10M116 168l16 16M60 182l-6 20M100 182l6 20" fill="none"/>
+            <!-- Cuerpo rojo (ovalo de catarina) -->
+            <ellipse class="character-outline" cx="80" cy="130" rx="54" ry="60" fill="#e94255"/>
+            <!-- Linea central de las alas -->
+            <path class="character-line" d="M80 74v112" fill="none"/>
+            <!-- Puntos negros -->
             <g fill="#302c35">
-                <circle cx="55" cy="82" r="7"/><circle cx="104" cy="82" r="7"/>
-                <circle cx="50" cy="112" r="7"/><circle cx="110" cy="112" r="7"/>
-                <circle cx="61" cy="140" r="6"/><circle cx="99" cy="140" r="6"/>
+                <circle cx="54" cy="108" r="8"/><circle cx="106" cy="108" r="8"/>
+                <circle cx="48" cy="140" r="8"/><circle cx="112" cy="140" r="8"/>
+                <circle cx="58" cy="168" r="7"/><circle cx="102" cy="168" r="7"/>
             </g>
-            <circle class="character-outline" cx="123" cy="123" r="18" fill="#e94255"/>
-            <circle cx="123" cy="123" r="5" fill="#302c35"/>
-            <path class="character-line" d="M123 105v36M105 123h36" fill="none"/>
+            <!-- Cabeza negra -->
+            <path class="character-outline" d="M54 78c0-18 12-28 26-28s26 10 26 28c-8 10-44 10-52 0z" fill="#302c35"/>
+            <!-- Ojos -->
+            <circle cx="68" cy="68" r="7" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
+            <circle cx="92" cy="68" r="7" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
+            <circle cx="68" cy="68" r="2.5" fill="#302c35"/>
+            <circle cx="92" cy="68" r="2.5" fill="#302c35"/>
+            <!-- Antenas -->
+            <path class="character-line" d="M66 50l-8-16M94 50l8-16" fill="none"/>
+            <circle class="character-outline" cx="56" cy="32" r="4" fill="#302c35"/>
+            <circle class="character-outline" cx="104" cy="32" r="4" fill="#302c35"/>
         </svg>
 
-        <svg class="character character-luffy" viewBox="0 0 180 220">
-            <path class="character-outline" d="M61 42c0-22 12-34 29-34s29 12 29 34l-8 23H68z" fill="#f3c64e"/>
-            <path class="character-line" d="M62 38c17-8 39-8 56 1M67 28c15-5 31-5 45 1M80 11l-4 48M101 11l5 49" fill="none"/>
-            <path class="character-outline" d="M72 48c4-14 35-14 40 0v28c-10 10-30 10-40 0z" fill="#e7a36f"/>
-            <path d="M78 61l4 2M101 62l4-2M87 72c5 4 10 4 15 0" fill="none" stroke="#302c35" stroke-width="3" stroke-linecap="round"/>
-            <path class="character-outline" d="M69 51c9 9 31 9 42 0l-1 35H70z" fill="#f2b94b"/>
-            <path class="character-outline" d="M72 76c-8 14-10 39-8 57l-14 40 19 6 18-34 17 35 19-7-16-40c3-20 1-43-8-57z" fill="#e44848"/>
-            <path class="character-line" d="M80 80l10 25 10-25M90 105v40M67 119c16 9 32 9 47 0" fill="none"/>
-            <path class="character-outline" d="M69 137h45l-4 31-18 2-17-2z" fill="#2e75ae"/>
-            <path class="character-line" d="M91 139l-2 29M104 139l3 28" fill="none"/>
-            <path class="character-outline" d="M64 166l-13 39 22 1 17-38zM108 167l17 38 21-1-15-40z" fill="#b87945"/>
+        <svg class="character character-chopper" viewBox="0 0 180 220">
+            <!-- Astas / cuernos redondeados -->
+            <path class="character-line" d="M60 46c-10-8-22-6-28 4M60 46c-14-2-24 4-26 14M118 46c10-8 22-6 28 4M118 46c14-2 24 4 26 14" fill="none" stroke-width="4"/>
+            <!-- Gorro rosado peludo -->
+            <path class="character-outline" d="M48 60c0-24 16-38 42-38s42 14 42 38c-8 10-76 10-84 0z" fill="#f0a9b8"/>
+            <path class="character-line" d="M54 58c10 6 62 6 72 0" fill="none"/>
+            <!-- Cruz medica de lado -->
+            <path class="character-line" d="M84 34h12M90 28v12" fill="none" stroke="#e94255" stroke-width="5"/>
+            <!-- Ala del gorro -->
+            <path class="character-outline" d="M42 64c12 8 84 8 96 0l-2 10c-14 8-78 8-92 0z" fill="#e0889a"/>
+            <!-- Cara (pelaje marron claro) -->
+            <path class="character-outline" d="M50 80c0-16 18-24 40-24s40 8 40 24-18 34-40 34-40-18-40-34z" fill="#d9a86c"/>
+            <!-- Ojos grandes redondos -->
+            <circle cx="70" cy="86" r="8" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
+            <circle cx="110" cy="86" r="8" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
+            <circle cx="70" cy="87" r="3.5" fill="#302c35"/>
+            <circle cx="110" cy="87" r="3.5" fill="#302c35"/>
+            <!-- Nariz azul -->
+            <ellipse cx="90" cy="100" rx="9" ry="6" fill="#4aa3df" stroke="#302c35" stroke-width="2.5"/>
+            <path class="character-line" d="M78 108c8 6 16 6 24 0" fill="none"/>
+            <!-- Cuerpo pequeño -->
+            <path class="character-outline" d="M64 112c6 10 46 10 52 0l6 44c-14 10-50 10-64 0z" fill="#d9a86c"/>
+            <!-- Pantaloncito marron -->
+            <path class="character-outline" d="M60 150h60l-6 40-24 2-24-2z" fill="#9c5a2e"/>
+            <path class="character-line" d="M90 152v38" fill="none"/>
+            <!-- Brazos -->
+            <path class="character-line" d="M64 120l-16 16M116 120l16 16" fill="none"/>
         </svg>
     </div>
 
