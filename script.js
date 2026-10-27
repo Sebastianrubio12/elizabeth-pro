@@ -1,7 +1,10 @@
 /**
- * Arreglo de frases románticas.
- * Se elige una diferente cada día basada en la fecha actual.
+ * ============================================================================
+ * LÓGICA PRINCIPAL (TEXTOS Y AUDIO)
+ * ============================================================================
  */
+
+// Array con las 40 frases románticas
 const frases = [
     "¿Quién diría que la mezcla de queso con helado y chocolate se parece tanto a nosotros? Una locura inesperada, pero absolutamente perfecta.",
     "Espero que hoy tengas un día tan espectacular como un buen plato de frijoles con chicharrón. ¡A comerte el mundo, hermosa!",
@@ -45,9 +48,7 @@ const frases = [
     "Te amo por lo que eres, por lo que me impulsas a ser y por todo lo hermoso que construiremos juntos. ¡Que tengas un día maravilloso!"
 ];
 
-/**
- * Lógica para reproducir/pausar la música de fondo.
- */
+// Lógica de control de música
 const musicBtn = document.getElementById('music-control');
 const bgMusic = document.getElementById('bg-music');
 let isPlaying = false;
@@ -63,27 +64,22 @@ musicBtn.addEventListener('click', () => {
     isPlaying = !isPlaying;
 });
 
-/**
- * Selecciona y muestra la frase correspondiente al día actual.
- */
+// Función para seleccionar la frase según el día actual
 function mostrarFraseDelDia() {
     const hoy = new Date();
-    // Generar un número (semilla) basado en la fecha actual
+    // Usa la fecha como "semilla" para que la frase sea la misma durante todo el día
     const semilla = hoy.getFullYear() + hoy.getMonth() + hoy.getDate();
     const indiceFrase = semilla % frases.length;
 
-    // Mostrar la frase
+    // Actualiza el texto de la tarjeta
     document.getElementById('quote-text').innerText = `"${frases[indiceFrase]}"`;
 
-    // Mostrar la fecha formateada en español
+    // Formatea la fecha y la muestra
     const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('current-date').innerText = hoy.toLocaleDateString('es-ES', opcionesFecha);
 }
 
-/**
- * Inicializar todo cuando la página termine de cargar
- */
+// Inicializa las funciones al cargar la ventana
 window.onload = () => {
     mostrarFraseDelDia();
-    // La animación de la flor SVG se maneja completamente con CSS
 };
