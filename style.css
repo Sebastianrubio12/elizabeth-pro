@@ -25,7 +25,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100dvh;
     overflow-x: hidden;
     position: relative;
 }
@@ -108,7 +108,7 @@ body {
     width: 90%;
     max-width: 600px;
     margin-top: 15vh;
-    margin-bottom: 30vh; /* Aumentado para que no se superponga con los tulipanes que subiremos */
+    margin-bottom: 25vh; /* Aumentado para que no se superponga con los tulipanes que subiremos */
     padding: 40px 30px 40px 60px;
     border-radius: 5px;
     box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
@@ -174,7 +174,7 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 35vh; /* Aumentado para que sean más altos */
+    height: 20vh; z-index: 20; /* Aumentado para que sean más altos */
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
@@ -247,7 +247,8 @@ body {
         line-height: 32px;
     }
     .notebook-paper {
-        margin-top: 25vh;
+        margin-top: 10vh;
+        margin-bottom: 25vh;
         width: 95%;
         padding: 30px 20px 30px 50px;
     }
@@ -267,7 +268,10 @@ body {
         height: 70px;
     }
 
-    .tulip-svg {
-        width: 15%;
+        .tulip-svg {
+        width: 12%;
+        height: 100%;
+        max-width: 120px;
+        min-width: 30px;
     }
 }
