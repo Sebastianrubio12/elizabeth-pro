@@ -1,144 +1,219 @@
+/* =========================================
+   VARIABLES GLOBALES
+   ========================================= */
+:root {
+    --bg-color: #fcf9f2; /* Color crema suave (papel) */
+    --text-color: #333;
+    --paper-line: #b3d4fc; /* Azul claro para lineas de cuaderno */
+    --paper-margin: #ff9999; /* Rojo suave para el margen */
+    --accent-color: #e06e88; /* Para título */
+}
+
+/* =========================================
+   RESETEO BÁSICO
+   ========================================= */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    font-family: 'Caveat', cursive;
-    /* Paper texture effect using radial gradients and a subtle noise pattern */
-    background-color: #f4ecd8;
-    background-image:
-        radial-gradient(circle at 100% 150%, rgba(255,255,255,0.3) 24%, rgba(0,0,0,0) 25%),
-        radial-gradient(circle at 0% 150%, rgba(255,255,255,0.3) 24%, rgba(0,0,0,0) 25%),
-        radial-gradient(circle at 50% 100%, rgba(255,255,255,0.1) 10%, rgba(0,0,0,0) 11%),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-    background-size: 100% 100%, 100% 100%, 100% 100%, 150px 150px;
-    height: 100vh;
-    height: 100dvh;
+    font-family: 'Caveat', cursive, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
     position: relative;
-    color: #4a4a4a;
 }
 
-/* --- TARJETA PRINCIPAL --- */
-.card {
-    background: transparent;
-    padding: 2.5rem 2rem;
+/* =========================================
+   BOTÓN DE MÚSICA
+   ========================================= */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #5a8b5e;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    font-family: 'Caveat', cursive;
+    color: #5a8b5e;
+}
+.music-btn:hover {
+    background: #e8f5e9;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   CIELO (SOL Y NUBES)
+   ========================================= */
+#sky-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+#sun-svg {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 0 10px rgba(255, 202, 40, 0.4));
+}
+
+.cloud-svg {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    opacity: 0.8;
+}
+
+/* Animación de nubes flotando */
+@keyframes floatCloud {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+}
+.cloud-svg:nth-child(2) { animation: floatCloud 20s ease-in-out infinite; }
+.cloud-svg:nth-child(3) { animation: floatCloud 25s ease-in-out infinite reverse; }
+
+/* Animación del sol girando lentamente */
+@keyframes rotateSun {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#sun-svg { animation: rotateSun 60s linear infinite; }
+
+
+/* =========================================
+   CONTENEDOR DEL MENSAJE (HOJA DE CUADERNO)
+   ========================================= */
+.notebook-paper {
+    background-color: #fff;
     width: 90%;
-    max-width: 500px;
-    text-align: center;
-    z-index: 10;
-    animation: fadeInCard 1.5s ease-out;
+    max-width: 600px;
+    margin-top: 15vh;
+    margin-bottom: 30vh; /* Aumentado para que no se superponga con los tulipanes que subiremos */
+    padding: 40px 30px 40px 60px;
+    border-radius: 5px;
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
     position: relative;
+    z-index: 10;
+    text-align: center;
+
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        var(--paper-line) 31px,
+        var(--paper-line) 32px
+    );
+    line-height: 32px;
 }
 
-@keyframes fadeInCard {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.notebook-paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    width: 2px;
+    background-color: var(--paper-margin);
+    z-index: -1;
 }
 
-h1 {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    color: #d8456b; /* Crayon red/pink */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-    transform: rotate(-2deg);
+#main-title {
+    color: var(--accent-color);
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    font-weight: 700;
 }
 
 .quote-container {
-    margin: 1.8rem 0;
-    min-height: 120px;
+    margin: 20px 0;
+    min-height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #quote-text {
-    font-size: 2rem;
-    color: #3b5998; /* Crayon blue */
-    line-height: 1.5;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #1a5276;
+    transition: opacity 0.5s ease;
+    padding-top: 5px;
 }
 
 .date {
-    font-size: 1.5rem;
-    color: #558b2f; /* Crayon green */
-    font-weight: 700;
-    margin-top: 1rem;
-    letter-spacing: 1px;
-    transform: rotate(1deg);
+    margin-top: 30px;
+    font-size: 1.2rem;
+    color: #388e3c;
+    text-align: right;
 }
 
-/* --- BOTÓN DE MÚSICA --- */
-.music-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: transparent;
-    border: 2px solid #558b2f; /* Crayon green border */
-    padding: 10px 18px;
-    border-radius: 10px;
-    color: #558b2f;
-    font-family: 'Caveat', cursive;
-    font-size: 1.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s, background-color 0.2s;
-    box-shadow: 2px 2px 0px rgba(85, 139, 47, 0.2);
-}
-
-.music-btn:hover {
-    transform: scale(1.05) rotate(-1deg);
-    background-color: rgba(85, 139, 47, 0.1);
-}
-
-@media (max-width: 380px) {
-    h1 { font-size: 3rem; }
-    #quote-text { font-size: 1.6rem; }
-    .card { padding: 1.8rem 1.5rem; }
-}
-/* Archivo de estilos adicionales para los tulipanes */
-
+/* =========================================
+   JARDÍN DE TULIPANES (FONDO)
+   ========================================= */
 #garden-container {
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
-    height: 60vh;
+    height: 35vh; /* Aumentado para que sean más altos */
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
     pointer-events: none;
-    z-index: 1; /* Detrás del texto */
+    z-index: 5;
+    padding: 0 5%;
 }
 
 .tulip-svg {
-    position: absolute;
-    bottom: -10px;
-    transform-origin: bottom center;
+    width: 12%;
+    max-width: 120px; /* Aumentado */
+    min-width: 60px; /* Aumentado */
+    height: 100%; /* Ocupa el alto del contenedor */
+    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));
 }
 
-/* Efecto de dibujo animado (dash) */
-.draw-path {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: drawLine 3s ease-out forwards;
+/* =========================================
+   EFECTOS ESTILO CRAYÓN / DIBUJO ANIMADO
+   ========================================= */
+.crayon-stroke {
     stroke-linecap: round;
     stroke-linejoin: round;
-    fill: none;
 }
 
-/* Efecto de llenado animado */
-.fill-path {
-    opacity: 0;
-    animation: fillColor 1.5s ease-in forwards;
+/* =========================================
+   ANIMACIONES SVG (Se dibujan poco a poco)
+   ========================================= */
+.sun-core, .sun-ray, .cloud-path, .stem, .leaf, .petal {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 3s ease forwards;
 }
+
+.sun-core { animation-delay: 0.5s; }
+.sun-ray { animation-delay: 1s; }
+.cloud-path { animation-delay: 1.5s; }
+.stem { animation-delay: 2s; }
+.leaf { animation-delay: 2.5s; }
+.petal { animation-delay: 3s; }
 
 @keyframes drawLine {
     to {
@@ -146,18 +221,53 @@ h1 {
     }
 }
 
-@keyframes fillColor {
-    to {
-        opacity: 0.8; /* Ligeramente transparente para parecer crayón */
+@keyframes sway {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+}
+.tulip-svg {
+    transform-origin: bottom center;
+    animation: sway 5s ease-in-out infinite;
+}
+.tulip-svg:nth-child(even) {
+    animation-duration: 6s;
+    animation-delay: 1s;
+}
+
+/* =========================================
+   MEDIA QUERIES (RESPONSIVE)
+   ========================================= */
+@media (max-width: 768px) {
+    #main-title {
+        font-size: 2.2rem;
     }
-}
+    #quote-text {
+        font-size: 1.4rem;
+        line-height: 32px;
+    }
+    .notebook-paper {
+        margin-top: 25vh;
+        width: 95%;
+        padding: 30px 20px 30px 50px;
+    }
+    .notebook-paper::before {
+        left: 30px;
+    }
 
-/* Animación sutil de balanceo por el viento */
-.sway {
-    animation: gentleSway 4s infinite alternate ease-in-out;
-}
+    #sun-svg {
+        width: 80px;
+        height: 80px;
+        left: -10px;
+        top: 0;
+    }
 
-@keyframes gentleSway {
-    0% { transform: rotate(-2deg) scale(var(--scale)); }
-    100% { transform: rotate(2deg) scale(var(--scale)); }
+    .cloud-svg {
+        width: 100px;
+        height: 70px;
+    }
+
+    .tulip-svg {
+        width: 15%;
+    }
 }

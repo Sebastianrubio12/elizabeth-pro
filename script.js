@@ -1,3 +1,10 @@
+/**
+ * ============================================================================
+ * LÓGICA PRINCIPAL (TEXTOS Y AUDIO)
+ * ============================================================================
+ */
+
+// Array con las 40 frases románticas
 const frases = [
     "¿Quién diría que la mezcla de queso con helado y chocolate se parece tanto a nosotros? Una locura inesperada, pero absolutamente perfecta.",
     "Espero que hoy tengas un día tan espectacular como un buen plato de frijoles con chicharrón. ¡A comerte el mundo, hermosa!",
@@ -41,10 +48,11 @@ const frases = [
     "Te amo por lo que eres, por lo que me impulsas a ser y por todo lo hermoso que construiremos juntos. ¡Que tengas un día maravilloso!"
 ];
 
-// Lógica de música
+// Lógica de control de música
 const musicBtn = document.getElementById('music-control');
 const bgMusic = document.getElementById('bg-music');
 let isPlaying = false;
+
 musicBtn.addEventListener('click', () => {
     if (isPlaying) {
         bgMusic.pause();
@@ -56,101 +64,45 @@ musicBtn.addEventListener('click', () => {
     isPlaying = !isPlaying;
 });
 
+// Función para seleccionar la frase según el día actual
 function mostrarFraseDelDia() {
     const hoy = new Date();
+    // Usa la fecha como "semilla" para que la frase sea la misma durante todo el día
     const semilla = hoy.getFullYear() + hoy.getMonth() + hoy.getDate();
     const indiceFrase = semilla % frases.length;
 
+    // Actualiza el texto de la tarjeta
     document.getElementById('quote-text').innerText = `"${frases[indiceFrase]}"`;
 
+    // Formatea la fecha y la muestra
     const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('current-date').innerText = hoy.toLocaleDateString('es-ES', opcionesFecha);
 }
 
-// Generador de tulipanes SVG animados tipo crayón
-function generarTulipanes() {
-    const container = document.getElementById('garden-container');
-    const numTulipanes = 12 + Math.floor(Math.random() * 8); // Entre 12 y 20 tulipanes
+// Para el efecto de escritura, si se desea
+function animarTextoCrayon() {
+    const quoteText = document.getElementById('quote-text');
+    const text = quoteText.innerText;
+    quoteText.innerText = '';
+    quoteText.style.opacity = 1;
 
-    // Filtro SVG para textura rugosa (crayón/lápiz)
-    const defsSVG = `
-        <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
-            <defs>
-                <filter id="crayon-texture" x="0" y="0" width="100%" height="100%">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="4" result="noise" />
-                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
-                </filter>
-            </defs>
-        </svg>
-    `;
-    container.insertAdjacentHTML('beforeend', defsSVG);
-
-    // Paleta de colores para los pétalos
-    const colores = ['#FF6B6B', '#FFA07A', '#FFD700', '#FF69B4', '#FFB6C1'];
-
-    for (let i = 0; i < numTulipanes; i++) {
-        const left = Math.random() * 90 + 5; // 5% a 95%
-        const scale = 0.6 + Math.random() * 0.6; // 0.6x a 1.2x
-        const delayDraw = Math.random() * 2; // Retraso en inicio de dibujo
-        const delayFill = delayDraw + 1.5 + Math.random() * 1; // Retraso en llenado
-        const color = colores[Math.floor(Math.random() * colores.length)];
-        const talloHeight = 100 + Math.random() * 100;
-
-        // Coordenadas para el tulipán
-        const svgHeight = talloHeight + 100;
-
-        const tulipDiv = document.createElement('div');
-        tulipDiv.className = 'tulip-svg sway';
-        tulipDiv.style.left = `${left}%`;
-        tulipDiv.style.setProperty('--scale', scale);
-        tulipDiv.style.zIndex = Math.floor(scale * 10); // Los más grandes al frente
-
-        const tulipHTML = `
-            <svg width="100" height="${svgHeight}" viewBox="0 0 100 ${svgHeight}"
-                 style="filter: url(#crayon-texture);" xmlns="http://www.w3.org/2000/svg">
-                <!-- Tallo -->
-                <path class="draw-path" d="M 50 ${svgHeight} Q 40 ${svgHeight - talloHeight/2} 50 80"
-                      stroke="#4CAF50" stroke-width="4" style="animation-delay: ${delayDraw}s;"></path>
-
-                <!-- Hoja Izquierda -->
-                <path class="draw-path" d="M 50 ${svgHeight - talloHeight*0.7} Q 20 ${svgHeight - talloHeight*0.8} 30 ${svgHeight - talloHeight*0.4}"
-                      stroke="#4CAF50" stroke-width="3" style="animation-delay: ${delayDraw + 0.5}s;"></path>
-                <path class="fill-path" d="M 50 ${svgHeight - talloHeight*0.7} Q 20 ${svgHeight - talloHeight*0.8} 30 ${svgHeight - talloHeight*0.4} Q 45 ${svgHeight - talloHeight*0.5} 50 ${svgHeight - talloHeight*0.7}"
-                      fill="#4CAF50" style="animation-delay: ${delayFill}s;"></path>
-
-                <!-- Hoja Derecha -->
-                <path class="draw-path" d="M 50 ${svgHeight - talloHeight*0.5} Q 80 ${svgHeight - talloHeight*0.6} 70 ${svgHeight - talloHeight*0.2}"
-                      stroke="#4CAF50" stroke-width="3" style="animation-delay: ${delayDraw + 0.7}s;"></path>
-                <path class="fill-path" d="M 50 ${svgHeight - talloHeight*0.5} Q 80 ${svgHeight - talloHeight*0.6} 70 ${svgHeight - talloHeight*0.2} Q 55 ${svgHeight - talloHeight*0.3} 50 ${svgHeight - talloHeight*0.5}"
-                      fill="#4CAF50" style="animation-delay: ${delayFill}s;"></path>
-
-                <!-- Cabeza de la flor (Contornos) -->
-                <!-- Pétalo Central Posterior -->
-                <path class="draw-path" d="M 50 80 Q 35 20 50 10 Q 65 20 50 80"
-                      stroke="${color}" stroke-width="3" style="animation-delay: ${delayDraw + 1}s;"></path>
-                <path class="fill-path" d="M 50 80 Q 35 20 50 10 Q 65 20 50 80"
-                      fill="${color}" style="animation-delay: ${delayFill + 0.2}s;"></path>
-
-                <!-- Pétalo Izquierdo -->
-                <path class="draw-path" d="M 50 80 C 20 70, 10 30, 30 20 C 35 35, 45 40, 50 80"
-                      stroke="${color}" stroke-width="3" style="animation-delay: ${delayDraw + 1.2}s;"></path>
-                <path class="fill-path" d="M 50 80 C 20 70, 10 30, 30 20 C 35 35, 45 40, 50 80"
-                      fill="${color}" style="animation-delay: ${delayFill + 0.4}s;"></path>
-
-                <!-- Pétalo Derecho -->
-                <path class="draw-path" d="M 50 80 C 80 70, 90 30, 70 20 C 65 35, 55 40, 50 80"
-                      stroke="${color}" stroke-width="3" style="animation-delay: ${delayDraw + 1.4}s;"></path>
-                <path class="fill-path" d="M 50 80 C 80 70, 90 30, 70 20 C 65 35, 55 40, 50 80"
-                      fill="${color}" style="animation-delay: ${delayFill + 0.6}s;"></path>
-            </svg>
-        `;
-
-        tulipDiv.innerHTML = tulipHTML;
-        container.appendChild(tulipDiv);
-    }
+    let i = 0;
+    const typingEffect = setInterval(() => {
+        if (i < text.length) {
+            quoteText.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingEffect);
+        }
+    }, 30); // Velocidad de escritura
 }
 
+// Inicializa las funciones al cargar la ventana
 window.onload = () => {
     mostrarFraseDelDia();
-    generarTulipanes();
+
+    // Pequeño retraso para que las flores y el cielo se dibujen primero
+    setTimeout(() => {
+        animarTextoCrayon();
+    }, 3500);
 };
