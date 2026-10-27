@@ -39,85 +39,9 @@
     </div>
 
     <div id="character-decorations" aria-hidden="true">
-        <svg class="character character-kitty" viewBox="0 0 160 220">
-            <defs><filter id="crayon-texture"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="8" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.3"/></filter></defs>
-            <!-- Orejas -->
-            <path class="character-outline" d="M40 70 L26 34 L62 52 Z" fill="#fffdf3"/>
-            <path class="character-outline" d="M120 70 L134 34 L98 52 Z" fill="#fffdf3"/>
-            <!-- Cabeza grande (ovalo/cuadrado redondeado) -->
-            <path class="character-outline" d="M30 86c0-26 22-42 50-42s50 16 50 42-22 46-50 46-50-20-50-46z" fill="#fffdf3"/>
-            <!-- Ojos -->
-            <ellipse cx="62" cy="88" rx="5.5" ry="8" fill="#302c35" stroke="none"/>
-            <ellipse cx="98" cy="88" rx="5.5" ry="8" fill="#302c35" stroke="none"/>
-            <!-- Nariz amarilla -->
-            <ellipse cx="80" cy="100" rx="7" ry="5" fill="#ffca28"/>
-            <!-- Bigotes -->
-            <path class="character-line" d="M44 90l-18-4M44 100l-19 2M44 110l-17 7M116 90l18-4M116 100l19 2M116 110l17 7" fill="none"/>
-            <!-- Lazo rojo en la oreja izquierda -->
-            <path class="character-outline" d="M34 60l-20-12 4 24z" fill="#e94255"/>
-            <path class="character-outline" d="M34 60l20-12-4 24z" fill="#e94255"/>
-            <circle class="character-outline" cx="34" cy="60" r="7" fill="#e94255"/>
-            <!-- Cuerpo trapezoidal -->
-            <path class="character-outline" d="M58 128h44l10 60H48z" fill="#e94255"/>
-            <path class="character-line" d="M80 132v54" fill="none"/>
-            <!-- Piernas -->
-            <path class="character-outline" d="M52 186h22v22H52zM86 186h22v22H86z" fill="#fffdf3"/>
-        </svg>
-
-        <svg class="character character-ladybug" viewBox="0 0 160 220">
-            <!-- Patas -->
-            <path class="character-line" d="M46 150l-18 10M44 168l-16 16M114 150l18 10M116 168l16 16M60 182l-6 20M100 182l6 20" fill="none"/>
-            <!-- Cuerpo rojo (ovalo de catarina) -->
-            <ellipse class="character-outline" cx="80" cy="130" rx="54" ry="60" fill="#e94255"/>
-            <!-- Linea central de las alas -->
-            <path class="character-line" d="M80 74v112" fill="none"/>
-            <!-- Puntos negros -->
-            <g fill="#302c35">
-                <circle cx="54" cy="108" r="8"/><circle cx="106" cy="108" r="8"/>
-                <circle cx="48" cy="140" r="8"/><circle cx="112" cy="140" r="8"/>
-                <circle cx="58" cy="168" r="7"/><circle cx="102" cy="168" r="7"/>
-            </g>
-            <!-- Cabeza negra -->
-            <path class="character-outline" d="M54 78c0-18 12-28 26-28s26 10 26 28c-8 10-44 10-52 0z" fill="#302c35"/>
-            <!-- Ojos -->
-            <circle cx="68" cy="68" r="7" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
-            <circle cx="92" cy="68" r="7" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
-            <circle cx="68" cy="68" r="2.5" fill="#302c35"/>
-            <circle cx="92" cy="68" r="2.5" fill="#302c35"/>
-            <!-- Antenas -->
-            <path class="character-line" d="M66 50l-8-16M94 50l8-16" fill="none"/>
-            <circle class="character-outline" cx="56" cy="32" r="4" fill="#302c35"/>
-            <circle class="character-outline" cx="104" cy="32" r="4" fill="#302c35"/>
-        </svg>
-
-        <svg class="character character-chopper" viewBox="0 0 180 220">
-            <!-- Astas / cuernos redondeados -->
-            <path class="character-line" d="M60 46c-10-8-22-6-28 4M60 46c-14-2-24 4-26 14M118 46c10-8 22-6 28 4M118 46c14-2 24 4 26 14" fill="none" stroke-width="4"/>
-            <!-- Gorro rosado peludo -->
-            <path class="character-outline" d="M48 60c0-24 16-38 42-38s42 14 42 38c-8 10-76 10-84 0z" fill="#f0a9b8"/>
-            <path class="character-line" d="M54 58c10 6 62 6 72 0" fill="none"/>
-            <!-- Cruz medica de lado -->
-            <path class="character-line" d="M84 34h12M90 28v12" fill="none" stroke="#e94255" stroke-width="5"/>
-            <!-- Ala del gorro -->
-            <path class="character-outline" d="M42 64c12 8 84 8 96 0l-2 10c-14 8-78 8-92 0z" fill="#e0889a"/>
-            <!-- Cara (pelaje marron claro) -->
-            <path class="character-outline" d="M50 80c0-16 18-24 40-24s40 8 40 24-18 34-40 34-40-18-40-34z" fill="#d9a86c"/>
-            <!-- Ojos grandes redondos -->
-            <circle cx="70" cy="86" r="8" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
-            <circle cx="110" cy="86" r="8" fill="#fffdf3" stroke="#302c35" stroke-width="3"/>
-            <circle cx="70" cy="87" r="3.5" fill="#302c35"/>
-            <circle cx="110" cy="87" r="3.5" fill="#302c35"/>
-            <!-- Nariz azul -->
-            <ellipse cx="90" cy="100" rx="9" ry="6" fill="#4aa3df" stroke="#302c35" stroke-width="2.5"/>
-            <path class="character-line" d="M78 108c8 6 16 6 24 0" fill="none"/>
-            <!-- Cuerpo pequeño -->
-            <path class="character-outline" d="M64 112c6 10 46 10 52 0l6 44c-14 10-50 10-64 0z" fill="#d9a86c"/>
-            <!-- Pantaloncito marron -->
-            <path class="character-outline" d="M60 150h60l-6 40-24 2-24-2z" fill="#9c5a2e"/>
-            <path class="character-line" d="M90 152v38" fill="none"/>
-            <!-- Brazos -->
-            <path class="character-line" d="M64 120l-16 16M116 120l16 16" fill="none"/>
-        </svg>
+        <img class="character character-kitty" src="Hello%20Kitty.png" alt="Hello Kitty">
+        <img class="character character-ladybug" src="Marinette.png" alt="Ladybug">
+        <img class="character character-chopper" src="Chopper.png" alt="Chopper">
     </div>
 
     <div class="notebook-paper">

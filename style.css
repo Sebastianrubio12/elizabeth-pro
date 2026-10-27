@@ -52,6 +52,7 @@ body {
     position: absolute;
     width: 132px;
     height: 182px;
+    object-fit: contain;
     overflow: visible;
     filter: drop-shadow(2px 3px 0 rgba(48, 44, 53, 0.18));
     animation: characterFloat 6s ease-in-out infinite;
