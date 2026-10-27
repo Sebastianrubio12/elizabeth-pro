@@ -45,7 +45,18 @@ const frases = [
     "Ojalá el tiempo se detuviera cada vez que estamos bajo las cobijitas, muertos de risa por cualquier tontería.",
     "Tienes el don de hacer que lo ordinario se vuelva extraordinario. Contigo, la vida es una celebración constante.",
     "Eres mi refugio en los días de lluvia y mi sol en las mañanas frías. Eres todo lo que siempre soñé.",
-    "Te amo por lo que eres, por lo que me impulsas a ser y por todo lo hermoso que construiremos juntos. ¡Que tengas un día maravilloso!"
+    "Te amo por lo que eres, por lo que me impulsas a ser y por todo lo hermoso que construiremos juntos. ¡Que tengas un día maravilloso!",
+    "No necesito un traje de superhéroe para sentirme invencible, solo necesito ver que sonríes cuando te preparo tu Milo.",
+    "Si nuestra historia fuera un anime, sin duda serías esa heroína valiente e inteligente que siempre salva mi corazón.",
+    "Prometo cuidarte y quererte en todas las realidades de este multiverso, incluso si en alguna no nos gusta el queso con helado.",
+    "Verte estudiar y esforzarte por ser ingeniera me llena de orgullo; para mí, ya eres la mente más brillante de esta ciudad.",
+    "Quiero que nuestro próximo viaje no solo sea al sofá para ver películas en familia, sino directo a caminar juntos por París.",
+    "Eres más dulce que cualquier jugo de mango en leche y más mágica que cualquier miraculous que Ladybug pudiera usar.",
+    "Me encanta cómo me haces reír y pensar al mismo tiempo; eres mi capítulo favorito de la vida real.",
+    "Cada vez que veo un tulipán me acuerdo de ti, de tu belleza única y de lo mucho que quiero hacer florecer nuestro amor cada día.",
+    "Contigo hasta el chicharrón con frijoles sabe a cena de cinco estrellas, porque la mejor compañía eres tú.",
+    "Ese futuro en el que somos nosotros dos formando nuestra propia familia es el proyecto más hermoso que la vida me ha dado."
+
 ];
 
 // Lógica de control de música
