@@ -1,70 +1,219 @@
-/* ==========================================================================
-   ESTILOS PRINCIPALES Y TIPOGRAFÍA
-   ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+/* =========================================
+   VARIABLES GLOBALES
+   ========================================= */
+:root {
+    --bg-color: #fcf9f2; /* Color crema suave (papel) */
+    --text-color: #333;
+    --paper-line: #b3d4fc; /* Azul claro para lineas de cuaderno */
+    --paper-margin: #ff9999; /* Rojo suave para el margen */
+    --accent-color: #e06e88; /* Para título */
+}
 
+/* =========================================
+   RESETEO BÁSICO
+   ========================================= */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    /* Fondo que simula papel de acuarela con textura */
-    background-color: #fcfbf9;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-    height: 100vh;
-    height: 100dvh;
+    font-family: 'Caveat', cursive, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
     position: relative;
-    color: #4a3b3c;
 }
 
-/* ==========================================================================
-   ANIMACIÓN DE LA FLOR EN ACUARELA (SVG)
-   ========================================================================== */
-#flower-drawing-container {
+/* =========================================
+   BOTÓN DE MÚSICA
+   ========================================= */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #5a8b5e;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    font-family: 'Caveat', cursive;
+    color: #5a8b5e;
+}
+.music-btn:hover {
+    background: #e8f5e9;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   CIELO (SOL Y NUBES)
+   ========================================= */
+#sky-container {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1; /* Detrás de la tarjeta */
+    height: 40vh;
     pointer-events: none;
-    opacity: 0.8; /* Efecto suave de fondo */
-    filter: blur(1px); /* Ligero desenfoque para dar efecto de acuarela o recuerdo */
+    z-index: 1;
 }
 
-#rose-svg {
-    width: 60vmin; /* Tamaño relativo a la pantalla */
-    height: auto;
-    max-width: 400px;
+#sun-svg {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 0 10px rgba(255, 202, 40, 0.4));
 }
 
-/* Animación del trazo (como si se estuviera dibujando con lápiz/pincel) */
-.rose-path {
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
-    animation: drawLine 3s ease-in-out forwards;
+.cloud-svg {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    opacity: 0.8;
 }
 
-/* Animación de relleno (como si la acuarela estuviera sangrando) */
-.rose-petals path {
-    animation: drawLine 3s ease-in-out forwards, fillPetals 2s ease-in-out 2.5s forwards;
+/* Animación de nubes flotando */
+@keyframes floatCloud {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+}
+.cloud-svg:nth-child(2) { animation: floatCloud 20s ease-in-out infinite; }
+.cloud-svg:nth-child(3) { animation: floatCloud 25s ease-in-out infinite reverse; }
+
+/* Animación del sol girando lentamente */
+@keyframes rotateSun {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#sun-svg { animation: rotateSun 60s linear infinite; }
+
+
+/* =========================================
+   CONTENEDOR DEL MENSAJE (HOJA DE CUADERNO)
+   ========================================= */
+.notebook-paper {
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin-top: 15vh;
+    margin-bottom: 30vh; /* Aumentado para que no se superponga con los tulipanes que subiremos */
+    padding: 40px 30px 40px 60px;
+    border-radius: 5px;
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+    text-align: center;
+
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        var(--paper-line) 31px,
+        var(--paper-line) 32px
+    );
+    line-height: 32px;
 }
 
-.stem, .leaf {
-    animation: drawLine 3s ease-in-out forwards, fillLeaves 2s ease-in-out 2.5s forwards;
+.notebook-paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    width: 2px;
+    background-color: var(--paper-margin);
+    z-index: -1;
 }
+
+#main-title {
+    color: var(--accent-color);
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    font-weight: 700;
+}
+
+.quote-container {
+    margin: 20px 0;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#quote-text {
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #1a5276;
+    transition: opacity 0.5s ease;
+    padding-top: 5px;
+}
+
+.date {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    color: #388e3c;
+    text-align: right;
+}
+
+/* =========================================
+   JARDÍN DE TULIPANES (FONDO)
+   ========================================= */
+#garden-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 35vh; /* Aumentado para que sean más altos */
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    pointer-events: none;
+    z-index: 5;
+    padding: 0 5%;
+}
+
+.tulip-svg {
+    width: 12%;
+    max-width: 120px; /* Aumentado */
+    min-width: 60px; /* Aumentado */
+    height: 100%; /* Ocupa el alto del contenedor */
+    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.1));
+}
+
+/* =========================================
+   EFECTOS ESTILO CRAYÓN / DIBUJO ANIMADO
+   ========================================= */
+.crayon-stroke {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* =========================================
+   ANIMACIONES SVG (Se dibujan poco a poco)
+   ========================================= */
+.sun-core, .sun-ray, .cloud-path, .stem, .leaf, .petal {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 3s ease forwards;
+}
+
+.sun-core { animation-delay: 0.5s; }
+.sun-ray { animation-delay: 1s; }
+.cloud-path { animation-delay: 1.5s; }
+.stem { animation-delay: 2s; }
+.leaf { animation-delay: 2.5s; }
+.petal { animation-delay: 3s; }
 
 @keyframes drawLine {
     to {
@@ -72,121 +221,53 @@ body {
     }
 }
 
-@keyframes fillPetals {
-    from { fill: transparent; }
-    to { fill: rgba(224, 110, 136, 0.4); } /* Rosa suave, translúcido */
+@keyframes sway {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+}
+.tulip-svg {
+    transform-origin: bottom center;
+    animation: sway 5s ease-in-out infinite;
+}
+.tulip-svg:nth-child(even) {
+    animation-duration: 6s;
+    animation-delay: 1s;
 }
 
-@keyframes fillLeaves {
-    from { fill: transparent; }
-    to { fill: rgba(90, 139, 94, 0.3); } /* Verde suave, translúcido */
-}
+/* =========================================
+   MEDIA QUERIES (RESPONSIVE)
+   ========================================= */
+@media (max-width: 768px) {
+    #main-title {
+        font-size: 2.2rem;
+    }
+    #quote-text {
+        font-size: 1.4rem;
+        line-height: 32px;
+    }
+    .notebook-paper {
+        margin-top: 25vh;
+        width: 95%;
+        padding: 30px 20px 30px 50px;
+    }
+    .notebook-paper::before {
+        left: 30px;
+    }
 
-/* ==========================================================================
-   TARJETA PRINCIPAL (ESTILO PAPEL)
-   ========================================================================== */
-.card {
-    background: rgba(255, 255, 255, 0.9); /* Blanco casi opaco */
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Borde sutil */
-    border-radius: 12px; /* Bordes menos redondeados, más como un bloc de notas elegante */
-    padding: 3rem 2.5rem;
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0,0,0,0.05); /* Sombra suave */
-    z-index: 10; /* Encima de la flor */
-    animation: fadeInCard 1.5s ease-out 0.5s both; /* Aparece después de que empieza el dibujo */
-    position: relative;
-}
+    #sun-svg {
+        width: 80px;
+        height: 80px;
+        left: -10px;
+        top: 0;
+    }
 
-/* Efecto de comillas de fondo en la tarjeta */
-.card::before {
-    content: '"';
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 4rem;
-    font-family: serif;
-    color: rgba(224, 110, 136, 0.2);
-    line-height: 1;
-}
+    .cloud-svg {
+        width: 100px;
+        height: 70px;
+    }
 
-@keyframes fadeInCard {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3.5rem;
-    margin-bottom: 1.5rem;
-    color: #8c3b4a; /* Rojo oscuro romántico */
-    font-weight: 700;
-}
-
-.quote-container {
-    margin: 2rem 0;
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#quote-text {
-    font-size: 1.2rem;
-    color: #555;
-    line-height: 1.8;
-    font-weight: 300;
-    font-style: italic;
-}
-
-.date {
-    font-size: 0.85rem;
-    color: #9c7b80;
-    font-weight: 600;
-    margin-top: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* ==========================================================================
-   BOTÓN DE MÚSICA
-   ========================================================================== */
-.music-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 10px 18px;
-    border-radius: 20px;
-    color: #8c3b4a;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-}
-
-.music-btn:hover {
-    background: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-}
-
-/* ==========================================================================
-   MEDIA QUERIES PARA RESPONSIVIDAD
-   ========================================================================== */
-@media (max-width: 480px) {
-    h1 { font-size: 2.8rem; }
-    #quote-text { font-size: 1.1rem; }
-    .card { padding: 2.5rem 1.5rem; }
-    .card::before { font-size: 3rem; top: 15px; left: 15px; }
+    .tulip-svg {
+        width: 15%;
+    }
 }

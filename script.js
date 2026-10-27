@@ -79,7 +79,30 @@ function mostrarFraseDelDia() {
     document.getElementById('current-date').innerText = hoy.toLocaleDateString('es-ES', opcionesFecha);
 }
 
+// Para el efecto de escritura, si se desea
+function animarTextoCrayon() {
+    const quoteText = document.getElementById('quote-text');
+    const text = quoteText.innerText;
+    quoteText.innerText = '';
+    quoteText.style.opacity = 1;
+
+    let i = 0;
+    const typingEffect = setInterval(() => {
+        if (i < text.length) {
+            quoteText.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingEffect);
+        }
+    }, 30); // Velocidad de escritura
+}
+
 // Inicializa las funciones al cargar la ventana
 window.onload = () => {
     mostrarFraseDelDia();
+
+    // Pequeño retraso para que las flores y el cielo se dibujen primero
+    setTimeout(() => {
+        animarTextoCrayon();
+    }, 3500);
 };
