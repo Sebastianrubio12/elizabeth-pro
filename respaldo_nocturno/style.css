@@ -1,0 +1,245 @@
+/* =========================================
+   ESTILOS GENERALES Y FUENTES
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Evita el resaltado azul al tocar en móviles */
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Fondo con gradiente simulando el cielo nocturno */
+    background: linear-gradient(to bottom, #0b0f19 0%, #1a1525 50%, #3a1c31 100%);
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* =========================================
+   ESTRELLAS PARPADEANTES EN EL FONDO
+   ========================================= */
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none; /* No interactúan con el cursor */
+}
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #fff;
+    animation: twinkle infinite alternate;
+}
+@keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 10px #fff, 0 0 20px #fff; }
+}
+
+/* =========================================
+   LUNA INTERACTIVA
+   ========================================= */
+#moon {
+    position: fixed;
+    top: 8%;
+    right: 15%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at 30% 30%, #fffbd3, #fdf5a9);
+    border-radius: 50%;
+    box-shadow: 0 0 40px 10px rgba(253, 245, 169, 0.4), inset -10px -10px 20px rgba(0,0,0,0.1);
+    z-index: 1;
+    cursor: pointer; /* Indica que se puede hacer clic */
+    transition: all 0.3s ease;
+}
+/* Animación de pulso al hacer clic en la luna */
+.moon-pulse {
+    animation: moonGlow 1s ease-out;
+}
+@keyframes moonGlow {
+    0% { transform: scale(1); box-shadow: 0 0 40px 10px rgba(253, 245, 169, 0.4); }
+    50% { transform: scale(1.15); box-shadow: 0 0 80px 30px rgba(255, 255, 255, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 40px 10px rgba(253, 245, 169, 0.4); }
+}
+/* Cráteres de la luna */
+.crater { position: absolute; background: rgba(0,0,0,0.05); border-radius: 50%; }
+.c1 { width: 20px; height: 20px; top: 20px; left: 20px; }
+.c2 { width: 12px; height: 12px; top: 50px; left: 60px; }
+.c3 { width: 25px; height: 15px; top: 70px; left: 30px; transform: rotate(-20deg); }
+
+/* =========================================
+   FLORES NEÓN CON PROFUNDIDAD (JARDÍN)
+   ========================================= */
+#garden-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    pointer-events: none;
+}
+
+.flower-wrapper {
+    position: absolute;
+    bottom: -20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: bottom center;
+    opacity: 0;
+    animation: bloom 2s ease-out forwards, sway infinite alternate ease-in-out;
+}
+
+/* Animación de crecimiento al cargar */
+@keyframes bloom {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(var(--scale)); opacity: 1; }
+}
+/* Animación de balanceo con el viento */
+@keyframes sway {
+    0% { transform: scale(var(--scale)) rotate(-4deg); }
+    100% { transform: scale(var(--scale)) rotate(4deg); }
+}
+
+.stem-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+/* Tallo de la flor */
+.stem {
+    width: 4px;
+    height: var(--stem-h);
+    background: #ff5722;
+    box-shadow: 0 0 12px 2px #ff5722;
+    border-radius: 4px;
+    margin-top: -10px;
+}
+/* Hojas */
+.leaf {
+    position: absolute;
+    width: 12px;
+    height: 25px;
+    background: #ff5722;
+    box-shadow: 0 0 10px 2px #ff5722;
+    border-radius: 50% 0 50% 0;
+}
+.leaf.left { left: -10px; top: 40%; transform: rotate(-45deg); }
+.leaf.right { right: -10px; top: 60%; transform: rotate(45deg); }
+
+.flower-head {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+}
+/* Pétalos */
+.petal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 30px;
+    background: #ffc107;
+    border-radius: 50%;
+    transform-origin: 50% 100%;
+    margin-left: -5px;
+    margin-top: -30px;
+    box-shadow: 0 0 15px 3px #ff9800, 0 0 5px 1px #ffeb3b inset;
+}
+/* Rotación de cada pétalo en círculo */
+.petal:nth-child(1) { transform: rotate(0deg); } .petal:nth-child(2) { transform: rotate(45deg); }
+.petal:nth-child(3) { transform: rotate(90deg); } .petal:nth-child(4) { transform: rotate(135deg); }
+.petal:nth-child(5) { transform: rotate(180deg); } .petal:nth-child(6) { transform: rotate(225deg); }
+.petal:nth-child(7) { transform: rotate(270deg); } .petal:nth-child(8) { transform: rotate(315deg); }
+
+/* Centro de la flor */
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 8px #ffeb3b;
+    z-index: 3;
+}
+
+/* =========================================
+   TARJETA PRINCIPAL (MENSAJE)
+   ========================================= */
+.card {
+    background: rgba(20, 15, 30, 0.6);
+    /* Efecto de cristal translúcido */
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    width: 90%;
+    max-width: 460px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 193, 7, 0.1);
+    z-index: 10;
+    animation: fadeInCard 1.5s ease-out;
+    position: relative;
+}
+@keyframes fadeInCard { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Título */
+h1 { font-family: 'Dancing Script', cursive; font-size: 3.2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #f5d47a, #ffffff, #f7de94); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 0 15px rgba(245, 212, 122, 0.3); }
+
+/* Contenedor del texto/frase */
+.quote-container { margin: 1.8rem 0; min-height: 100px; display: flex; align-items: center; justify-content: center; }
+#quote-text { font-size: 1.15rem; color: #e6e0e9; line-height: 1.7; font-weight: 300; font-style: italic; letter-spacing: 0.5px; }
+
+/* Fecha */
+.date { font-size: 0.85rem; color: #f5d47a; font-weight: 600; margin-top: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+
+/* =========================================
+   BOTÓN DE MÚSICA
+   ========================================= */
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 18px;
+    border-radius: 30px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* =========================================
+   DISEÑO RESPONSIVO (MÓVILES PEQUEÑOS)
+   ========================================= */
+@media (max-width: 380px) {
+    h1 { font-size: 2.6rem; }
+    #quote-text { font-size: 1.1rem; }
+    .card { padding: 1.8rem 1.5rem; }
+    #moon { width: 70px; height: 70px; right: 10%; }
+}

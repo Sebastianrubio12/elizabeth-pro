@@ -64,92 +64,6 @@ musicBtn.addEventListener('click', () => {
 });
 
 /**
- * Animación de pulso al hacer clic en la luna.
- */
-function pulseMoon() {
-    const moon = document.getElementById('moon');
-    moon.classList.remove('moon-pulse');
-    // Forzar un reflow para reiniciar la animación
-    void moon.offsetWidth;
-    moon.classList.add('moon-pulse');
-}
-
-/**
- * Genera estrellas parpadeantes en posiciones aleatorias del cielo.
- */
-function crearEstrellas() {
-    const container = document.getElementById('stars-container');
-    for (let i = 0; i < 70; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        // Posición aleatoria
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        // Tamaño aleatorio
-        star.style.width = (Math.random() * 3 + 1) + 'px';
-        star.style.height = star.style.width;
-        // Velocidad y retraso de la animación
-        star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        star.style.animationDelay = (Math.random() * 5) + 's';
-        container.appendChild(star);
-    }
-}
-
-/**
- * Crea las flores neón en el fondo divididas en varias capas
- * para dar un efecto de profundidad.
- */
-function crearJardinConProfundidad() {
-    const container = document.getElementById('garden-container');
-
-    // Configuración de las capas del jardín (fondo, medio, frente)
-    const capas = [
-        { cantidad: 15, escalaMin: 0.3, escalaMax: 0.5, blur: '3px', z: 2, talloMin: 100, talloMax: 150, delayMax: 5 },
-        { cantidad: 12, escalaMin: 0.6, escalaMax: 0.8, blur: '1px', z: 4, talloMin: 140, talloMax: 200, delayMax: 4 },
-        { cantidad: 8,  escalaMin: 0.9, escalaMax: 1.2, blur: '0px', z: 6, talloMin: 180, talloMax: 250, delayMax: 3 }
-    ];
-
-    capas.forEach(capa => {
-        for (let i = 0; i < capa.cantidad; i++) {
-            const flower = document.createElement('div');
-            flower.className = 'flower-wrapper';
-            // Distribución horizontal
-            flower.style.left = (Math.random() * 96) + '%';
-            flower.style.zIndex = capa.z;
-            flower.style.filter = `blur(${capa.blur})`;
-
-            // Variación de tamaño según la capa
-            const escala = capa.escalaMin + Math.random() * (capa.escalaMax - capa.escalaMin);
-            flower.style.setProperty('--scale', escala);
-
-            // Tiempos de animación aleatorios
-            flower.style.animationDelay = (Math.random() * capa.delayMax) + 's';
-            flower.style.animationDuration = (4 + Math.random() * 4) + 's';
-
-            // Altura aleatoria del tallo
-            const altoTallo = capa.talloMin + Math.random() * (capa.talloMax - capa.talloMin);
-
-            // Estructura HTML de cada flor
-            flower.innerHTML = `
-                <div class="flower-head">
-                    <div class="petal"></div><div class="petal"></div>
-                    <div class="petal"></div><div class="petal"></div>
-                    <div class="petal"></div><div class="petal"></div>
-                    <div class="petal"></div><div class="petal"></div>
-                    <div class="center"></div>
-                </div>
-                <div class="stem-container">
-                    <div class="leaf left"></div>
-                    <div class="stem" style="--stem-h: ${altoTallo}px;"></div>
-                    <div class="leaf right"></div>
-                </div>
-            `;
-            container.appendChild(flower);
-        }
-    });
-}
-
-/**
  * Selecciona y muestra la frase correspondiente al día actual.
  */
 function mostrarFraseDelDia() {
@@ -171,6 +85,5 @@ function mostrarFraseDelDia() {
  */
 window.onload = () => {
     mostrarFraseDelDia();
-    crearEstrellas();
-    crearJardinConProfundidad();
+    // La animación de la flor SVG se maneja completamente con CSS
 };

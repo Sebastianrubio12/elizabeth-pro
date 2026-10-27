@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Elizabeth 💖</title>
+    <!-- Enlace al archivo de estilos externos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =========================================
+         ELEMENTOS DE AUDIO
+         ========================================= -->
+    <!-- Música de fondo que se reproduce en bucle -->
+    <audio id="bg-music" loop>
+        <source src="evangeline.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Botón para controlar la reproducción de música -->
+    <div id="music-control" class="music-btn">🎵 Activar música</div>
+
+    <!-- =========================================
+         ELEMENTOS DE FONDO (DISEÑO VISUAL)
+         ========================================= -->
+    <!-- Contenedor donde se generan dinámicamente las estrellas -->
+    <div id="stars-container"></div>
+
+    <!-- Luna interactiva con cráteres. Pulsa al hacer clic. -->
+    <div id="moon" onclick="pulseMoon()">
+        <div class="crater c1"></div>
+        <div class="crater c2"></div>
+        <div class="crater c3"></div>
+    </div>
+
+    <!-- Contenedor donde crecen dinámicamente las flores en capas -->
+    <div id="garden-container"></div>
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL (TARJETA)
+         ========================================= -->
+    <div class="card">
+        <!-- Título principal -->
+        <h1 id="main-title">Para Elizabeth</h1>
+
+        <!-- Contenedor para la frase romántica del día -->
+        <div class="quote-container">
+            <p id="quote-text">Buscando tu mensaje de hoy...</p>
+        </div>
+
+        <!-- Contenedor para mostrar la fecha actual -->
+        <div class="date" id="current-date"></div>
+    </div>
+
+    <!-- Enlace al archivo de JavaScript externo -->
+    <script src="script.js"></script>
+</body>
+</html>
