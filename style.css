@@ -24,7 +24,7 @@ html {
 }
 
 body {
-    font-family: 'Caveat', cursive, sans-serif;
+    font-family: 'Gloria Hallelujah', 'Caveat', cursive, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     display: flex;
@@ -38,63 +38,58 @@ body {
 }
 
 /* =========================================
-   PERSONAJES EN CRAYÓN
+   PERSONAJES COMO PEGATINAS (pegadas a la hoja)
    ========================================= */
-#character-decorations {
-    position: fixed;
-    inset: 0;
-    z-index: 4;
-    pointer-events: none;
-    overflow: hidden;
-}
-
 .character {
     position: absolute;
-    width: 132px;
-    height: 182px;
+    width: 92px;
+    height: 92px;
     object-fit: contain;
-    overflow: visible;
-    filter: drop-shadow(2px 3px 0 rgba(48, 44, 53, 0.18));
+    z-index: 20;
+    /* Contorno blanco que sigue la silueta de la figura (tipo sticker recortado) */
+    filter:
+        drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
+        drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+        drop-shadow(2px 2px 0 #fff) drop-shadow(-2px -2px 0 #fff)
+        drop-shadow(2px -2px 0 #fff) drop-shadow(-2px 2px 0 #fff)
+        drop-shadow(0 4px 5px rgba(48, 44, 53, 0.28));
     animation: characterFloat 6s ease-in-out infinite;
 }
 
-.character-outline,
-.character-line {
-    stroke: #302c35;
-    stroke-width: 3.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+/* Esquina superior izquierda */
+.character-chopper {
+    top: -40px;
+    left: -30px;
+    transform: rotate(-8deg);
 }
 
-.character-line {
-    stroke-width: 2.5;
-}
-
+/* Esquina superior derecha */
 .character-kitty {
-    left: max(12px, calc(50% - 405px));
-    top: 24vh;
-    transform: rotate(-5deg);
-}
-
-.character-ladybug {
-    right: max(12px, calc(50% - 405px));
-    top: 43vh;
-    transform: rotate(5deg);
+    top: -36px;
+    right: -30px;
+    transform: rotate(7deg);
     animation-delay: -2s;
 }
 
-.character-chopper {
-    right: max(12px, calc(50% - 430px));
-    top: 18vh;
-    width: 124px;
-    height: 152px;
-    transform: rotate(5deg);
+/* Esquina inferior izquierda (lejos de la fecha, que va a la derecha) */
+.character-ladybug {
+    bottom: -40px;
+    left: -24px;
+    transform: rotate(-6deg);
     animation-delay: -4s;
+}
+
+/* Esquina inferior derecha, al lado de la fecha sin taparla */
+.character-luffy {
+    bottom: -44px;
+    right: -30px;
+    transform: rotate(6deg);
+    animation-delay: -3s;
 }
 
 @keyframes characterFloat {
     0%, 100% { margin-top: 0; }
-    50% { margin-top: -7px; }
+    50% { margin-top: -5px; }
 }
 
 /* =========================================
@@ -113,7 +108,8 @@ body {
     z-index: 1000;
     transition: all 0.3s ease;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    font-family: 'Caveat', cursive;
+    font-family: 'Gloria Hallelujah', 'Caveat', cursive;
+    font-size: 1rem;
     color: #5a8b5e;
 }
 .music-btn:hover {
@@ -206,10 +202,12 @@ body {
 /* Sombrero de paja inspirado en One Piece, separado del texto */
 #main-title {
     color: var(--accent-color);
-    font-size: 3rem;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-    font-weight: 700;
+    font-size: 2.4rem;
+    margin-bottom: 24px;
+    line-height: 1.3;
+    /* Estilo crayola: trazo de crayon hecho a mano */
+    transform: rotate(-1.2deg);
+    text-shadow: 1px 1px 0 rgba(224, 110, 136, 0.3);
 }
 
 .quote-container {
@@ -221,18 +219,25 @@ body {
 }
 
 #quote-text {
-    font-size: 1.8rem;
-    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.7;
     color: #1a5276;
-    transition: opacity 0.5s ease;
     padding-top: 5px;
+    /* Estilo crayola: trazo irregular, como copiado a mano */
+    transform: rotate(-0.4deg);
+    text-shadow: 0.5px 0.5px 0 rgba(26, 82, 118, 0.2);
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .date {
     margin-top: 30px;
-    font-size: 1.2rem;
+    font-size: 0.95rem;
     color: #388e3c;
     text-align: right;
+    /* Estilo crayola a mano */
+    transform: rotate(0.8deg);
+    text-shadow: 0.5px 0.5px 0 rgba(56, 142, 60, 0.2);
 }
 
 /* =========================================
@@ -340,25 +345,32 @@ body {
         width: 15%;
     }
 
+    /* Pegatinas mas pequenas en movil, ancladas a las esquinas de la hoja */
     .character {
-        width: 78px;
-        height: 108px;
-    }
-
-    .character-kitty {
-        left: 5px;
-        top: 24vh;
-    }
-
-    .character-ladybug {
-        right: 5px;
-        top: 43vh;
+        width: 66px;
+        height: 66px;
+        padding: 5px;
+        border-radius: 12px;
     }
 
     .character-chopper {
-        right: 8px;
-        top: 18vh;
-        width: 78px;
-        height: 96px;
+        top: -24px;
+        left: -14px;
+    }
+
+    .character-kitty {
+        top: -22px;
+        right: -14px;
+    }
+
+    .character-ladybug {
+        bottom: -26px;
+        left: -14px;
+        right: auto;
+    }
+
+    .character-luffy {
+        bottom: -28px;
+        right: -16px;
     }
 }
