@@ -483,3 +483,75 @@ body {
         right: -16px;
     }
 }
+
+/* =========================================
+   EFECTO ESPACIAL / PARALLAX (estilo fondos de iPhone)
+   --tx y --ty van de -1 a 1 y se actualizan desde script.js
+   con el giroscopio (celular) o el mouse (computador).
+   Se usa la propiedad `translate` para no pisar los `transform`
+   y animaciones que ya tienen los elementos.
+   ========================================= */
+:root {
+    --tx: 0;
+    --ty: 0;
+}
+
+/* Capa más lejana: el fondo se agranda un poco para que no se vean bordes al moverse */
+#paper-texture-container {
+    top: -50px;
+    left: -50px;
+    width: calc(100vw + 100px);
+    height: calc(100vh + 100px);
+    translate: calc(var(--tx) * -14px) calc(var(--ty) * -14px);
+    will-change: translate;
+}
+
+.msb-pattern-layer {
+    translate: calc(var(--tx) * -16px) calc(var(--ty) * -16px);
+}
+
+/* Cielo: profundidad media-lejana */
+#sky-container {
+    translate: calc(var(--tx) * -8px) calc(var(--ty) * -8px);
+}
+
+/* Hoja: se inclina en 3D como una tarjeta flotando */
+body {
+    perspective: 1000px;
+}
+
+.notebook-paper {
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--tx) * 6deg)) rotateX(calc(var(--ty) * -6deg));
+    translate: calc(var(--tx) * 6px) calc(var(--ty) * 6px);
+    will-change: transform;
+}
+
+/* Personajes: "salen" de la hoja hacia la pantalla */
+.character {
+    translate: calc(var(--tx) * 10px) calc(var(--ty) * 10px) 45px;
+}
+
+/* Corazón y tulipanes: las capas más cercanas, se mueven más */
+#heart-svg {
+    translate: calc(var(--tx) * 14px) calc(var(--ty) * 14px);
+}
+
+#garden-container {
+    translate: calc(var(--tx) * 22px) calc(var(--ty) * 10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #paper-texture-container,
+    .msb-pattern-layer,
+    #sky-container,
+    .notebook-paper,
+    .character,
+    #heart-svg,
+    #garden-container {
+        translate: none;
+    }
+    .notebook-paper {
+        transform: none;
+    }
+}

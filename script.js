@@ -83,3 +83,86 @@ function mostrarFraseDelDia() {
 window.onload = () => {
     mostrarFraseDelDia();
 };
+
+
+/**
+ * ============================================================================
+ * EFECTO ESPACIAL / PARALLAX (como los fondos de pantalla del iPhone)
+ * - En celular: usa el giroscopio (inclinar el teléfono mueve las capas).
+ * - En computador: usa la posición del mouse.
+ * Actualiza las variables CSS --tx y --ty (rango -1 a 1).
+ * ============================================================================
+ */
+(function iniciarParallax() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const root = document.documentElement;
+    const RANGO_GRADOS = 20;   // Grados de inclinación para llegar al máximo
+    const SUAVIZADO = 0.08;    // Entre más bajo, más suave el movimiento
+
+    let objetivoX = 0, objetivoY = 0;
+    let actualX = 0, actualY = 0;
+    let baseBeta = null, baseGamma = null;
+    let giroscopioActivo = false;
+
+    const limitar = (v) => Math.max(-1, Math.min(1, v));
+
+    // Bucle de animación con interpolación suave
+    function animar() {
+        actualX += (objetivoX - actualX) * SUAVIZADO;
+        actualY += (objetivoY - actualY) * SUAVIZADO;
+        root.style.setProperty('--tx', actualX.toFixed(4));
+        root.style.setProperty('--ty', actualY.toFixed(4));
+        requestAnimationFrame(animar);
+    }
+    requestAnimationFrame(animar);
+
+    // --- Giroscopio (celular) ---
+    function alOrientar(e) {
+        if (e.beta === null || e.gamma === null) return;
+        giroscopioActivo = true;
+
+        // La primera lectura se toma como posición "neutral"
+        if (baseBeta === null) { baseBeta = e.beta; baseGamma = e.gamma; }
+
+        // La posición neutral se re-centra lentamente (como en iPhone)
+        baseBeta += (e.beta - baseBeta) * 0.005;
+        baseGamma += (e.gamma - baseGamma) * 0.005;
+
+        objetivoX = limitar((e.gamma - baseGamma) / RANGO_GRADOS);
+        objetivoY = limitar((e.beta - baseBeta) / RANGO_GRADOS);
+    }
+
+    function activarGiroscopio() {
+        window.addEventListener('deviceorientation', alOrientar);
+    }
+
+    const necesitaPermiso = typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function';
+
+    if (necesitaPermiso) {
+        // iPhone: el permiso solo se puede pedir tras un toque del usuario
+        const pedirPermiso = () => {
+            DeviceOrientationEvent.requestPermission()
+                .then((estado) => { if (estado === 'granted') activarGiroscopio(); })
+                .catch(() => {});
+            document.removeEventListener('click', pedirPermiso);
+            document.removeEventListener('touchend', pedirPermiso);
+        };
+        document.addEventListener('click', pedirPermiso);
+        document.addEventListener('touchend', pedirPermiso);
+    } else if ('DeviceOrientationEvent' in window) {
+        activarGiroscopio(); // Android
+    }
+
+    // --- Mouse (computador) ---
+    window.addEventListener('mousemove', (e) => {
+        if (giroscopioActivo) return;
+        objetivoX = limitar((e.clientX / window.innerWidth) * 2 - 1);
+        objetivoY = limitar((e.clientY / window.innerHeight) * 2 - 1);
+    });
+    document.addEventListener('mouseleave', () => {
+        if (giroscopioActivo) return;
+        objetivoX = 0; objetivoY = 0;
+    });
+})();
