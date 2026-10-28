@@ -82,10 +82,12 @@ body {
     animation-delay: -4s;
 }
 
-/* Esquina inferior derecha, al lado de la fecha sin taparla */
-.character-luffy {
-    bottom: -44px;
-    right: -30px;
+/* Esquina inferior derecha: Torre Eiffel decorativa */
+.character-eiffel, .character-luffy {
+    width: 82px;
+    height: 124px;
+    bottom: -52px;
+    right: -26px;
     transform: rotate(6deg);
     animation-delay: -3s;
 }
@@ -202,7 +204,7 @@ body {
     z-index: -1;
 }
 
-/* Sombrero de paja inspirado en One Piece, separado del texto */
+/* Estilo del título */
 #main-title {
     color: var(--accent-color);
     font-size: 2.4rem;
@@ -478,8 +480,10 @@ body {
         right: auto;
     }
 
-    .character-luffy {
-        bottom: -28px;
+    .character-eiffel, .character-luffy {
+        width: 62px;
+        height: 94px;
+        bottom: -38px;
         right: -16px;
     }
 }
